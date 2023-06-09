@@ -1,0 +1,5 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Thu Jun 08 12:51:17 MSK 2023","Thu Jun 08 12:51:21 MSK 2023","4852","All groups","Profile","START","START","SettingSystemlanguage","SettingSystemlanguage",""
+"passed","Thu Jun 08 12:51:09 MSK 2023","Thu Jun 08 12:51:16 MSK 2023","6999","All groups","Profile","START","START","SettingNiknameENGRUS","SettingNiknameENGRUS",""
+"passed","Thu Jun 08 12:51:21 MSK 2023","Thu Jun 08 12:51:22 MSK 2023","624","All groups","Quit","START","START","QUITUp","Выход из теста",""
+"broken","Thu Jun 08 12:48:39 MSK 2023","Thu Jun 08 12:48:39 MSK 2023","2","All groups","StartThis","START","START","WindowProfit","Развернуть окно + Авторизация",""

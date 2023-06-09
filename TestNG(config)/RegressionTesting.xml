@@ -1,0 +1,54 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name = "All groups">
+
+    <!--Старт-->
+    <test name="StartThis">
+        <groups>
+            <run>
+                <include name="StartThis"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="START" />
+        </classes>
+    </test>
+
+    <!--Профиль-->
+    <test name = "Profile">
+        <groups>
+            <run>
+                <include name="Profile"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="START"/>
+        </classes>
+    </test>
+
+    <!--Минер-->
+    <test name = "Miner">
+        <groups>
+            <run>
+                <include name="Miner"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="START"/>
+        </classes>
+    </test>
+
+    <!--Выход-->
+    <test name = "Quit">
+        <groups>
+            <run>
+                <include name="Quit"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="START"/>
+        </classes>
+    </test>
+
+</suite>
