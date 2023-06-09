@@ -23,19 +23,14 @@ public class SettingPromoCode {
     String InputPromoCode = "//input[@class=\"field field-group__field\"]";
     String promo = "482IE334JPWGI1GRFSO1";
     String ApplyPromoCode = "//button[@class=\"btn field-group__btn\"]";
-    public void settingPromoCode(WebDriver driver) throws InterruptedException{
+    public void settingPromoCode(WebDriver driver) throws InterruptedException, IOException {
         SoftAssert t = new SoftAssert();
-        driver.get(GetXProfilePROD);
+        driver.get(GetXProfileTest);
         Thread.sleep(1000);
         Date dateNow = new Date();
         SimpleDateFormat format = new SimpleDateFormat("dd_MM_hh_mm_ss");
         String fileName = format.format(dateNow) + ".png";
         File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-
-        //До
-        try {
-            FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
-        } catch (IOException e){e.printStackTrace();}
 
         //Клик по полю ввода промокода + ввод промокода
         driver.findElement(By.xpath(InputPromoCode)).sendKeys(promo);
@@ -50,12 +45,9 @@ public class SettingPromoCode {
 
         //Применить
         driver.findElement(By.xpath(ApplyPromoCode)).click();
+        Thread.sleep(400);
 
-        //После
-        try {
-            FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
-        } catch (IOException e){e.printStackTrace();}
-        Thread.sleep(200);
+        FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
 
         Allure.attachment("Dynamic attachment", "attachment content");
         t.assertAll();

@@ -27,7 +27,7 @@ public class PaymentSberbank {
         //Аллюр Аттач
         Allure.attachment("Dynamic attachment", "attachment content");
         //Перейти на сайт
-        driver.get(GetXProfilePROD);
+        driver.get(GetXProfileTest);
         Thread.sleep(1000);
         //Проверки
         SoftAssert t = new SoftAssert();

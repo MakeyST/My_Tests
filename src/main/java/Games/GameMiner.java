@@ -22,7 +22,7 @@ public class GameMiner {
     String BOmbsNamberFrom5Before24 = "//button[@class=\"bit-feed__btn active\"]";
     String OpenaCell = "//div[@class=\"miner_cell_container opened-cell\"]";
     String AnotherInput = "//input[@class=\"number-field__value number-field__value_bid\"]";
-    public void gameminer (WebDriver driver) throws InterruptedException{
+    public void gameminer (WebDriver driver) throws InterruptedException, IOException {
         Thread.sleep(1000);
         driver.get(GetXMINER);
         Thread.sleep(1500);
@@ -94,9 +94,8 @@ public class GameMiner {
         Thread.sleep(600);
 
         //После
-        try {
-            FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
-        } catch (IOException e){e.printStackTrace();}
+        FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
+
 
         //Забрать приз. Есть косяк, позже буду переписывать пару моментов с ветвлением. Чтобы проверялось условие. Если выйграл, то забрал, если нет, то завершаем тест.
         driver.findElements(By.xpath(WinMinerPlay)).get(0).click();

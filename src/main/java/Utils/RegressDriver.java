@@ -14,7 +14,7 @@ public class RegressDriver {
         String Test = "https://s01getx.click/";
         if (RegressDriver._regressDriver == null) {
             RegressDriver._regressDriver = new ChromeDriver();
-            _regressDriver.get(PROD);
+            _regressDriver.get(Test);
         }
         return RegressDriver._regressDriver;
     }

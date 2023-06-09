@@ -23,7 +23,7 @@ public class SettingNickname {
     String Change = "//button[@class=\"btn field-group__btn\"]";
     @Step("Смена никнейма")
     public void setNickname (WebDriver driver) throws InterruptedException  {
-        driver.get(GetXProfilePROD);
+        driver.get(GetXProfileTest);
         SoftAssert t = new SoftAssert();
         Date dateNow = new Date();
         SimpleDateFormat format = new SimpleDateFormat("dd_MM_hh_mm_ss");

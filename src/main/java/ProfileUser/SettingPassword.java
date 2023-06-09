@@ -16,15 +16,15 @@ import java.util.Date;
 public class SettingPassword {
     String GetXProfileTest = "https://s01getx.click/profile/setting";
     String GetXProfilePROD = "https://get22.cfd/profile/setting";
-    String InputOldPassword = "//input[@class=\"field field-group__field field_error field_icon\"]";
+    String InputOldPassword = "//input[@class=\"field field-group__field field_icon\"]";
     String OldPassword = "23Makey23";
     String NewPassword = "23makey23";
     String ConfirmPassword = "23makey23";
-    public void setPassword (WebDriver driver) throws InterruptedException{
+    public void setPassword (WebDriver driver) throws InterruptedException, IOException {
         //Аллюр Аттач
         Allure.attachment("Dynamic attachment", "attachment content");
         //Перейти на сайт
-        driver.get(GetXProfilePROD);
+        driver.get(GetXProfileTest);
         Thread.sleep(300);
         //Проверки
         SoftAssert t = new SoftAssert();
@@ -34,10 +34,6 @@ public class SettingPassword {
         SimpleDateFormat format = new SimpleDateFormat("dd_MM_hh_mm_ss");
         String fileName = format.format(dateNow) + ".png";
         File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        //До
-        try {
-            FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
-        } catch (IOException e){e.printStackTrace();}
 
         //Старый пароль
         driver.findElements(By.xpath(InputOldPassword)).get(0).click();
@@ -74,6 +70,8 @@ public class SettingPassword {
         t.assertEquals(TextConfirmPassword, ExpectedConfirmPassword, "Проверка поля Подтверждения нового пароля ПРОВАЛЕНА!");
         t.assertNotNull(TextConfirmPassword);
         System.out.println("*Проверка поля Подтверждения нового пароля, ---> выполнено*");
+        Thread.sleep(500);
+        FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
 
         //Выход
         t.assertAll();

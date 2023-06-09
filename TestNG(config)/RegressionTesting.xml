@@ -39,6 +39,18 @@
         </classes>
     </test>
 
+    <!--Способы оплаты-->
+    <test name = "Payment">
+        <groups>
+            <run>
+                <include name="Payment"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="START"/>
+        </classes>
+    </test>
+
     <!--Выход-->
     <test name = "Quit">
         <groups>

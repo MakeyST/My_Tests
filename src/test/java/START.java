@@ -1,4 +1,5 @@
 import Games.ConfigFileGames.StartGames;
+import Payment.ConfigFilePayment.StartPayment;
 import ProfileUser.ConfigFileProfile.StartProfileUser;
 import QuickGames.ConfigFileQuickGames.StartQuickGames;
 import Utils.ConfigFileUtils.StartUtils;
@@ -103,6 +104,7 @@ public class START {
     @Epic("ИГРА В МИНЕРА")
     @Owner("Makeenkov Igor")
     @Step("Игра Минер")
+    @Severity(SeverityLevel.CRITICAL)
     @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "Miner")
     public void GamesMiner(){
         try {
@@ -118,7 +120,16 @@ public class START {
         try {
             StartQuickGames GamesFast = new StartQuickGames();
             GamesFast.quickMiner(driver);
-            GamesFast.quickMiner(driver);
+        }catch (Exception e) {throw new RuntimeException(e);}}
+
+    @Feature("СПОСОБЫ ОПЛАТЫ")
+    @Owner("Makeenkov Igor")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "Payment")
+    public void PaymentSberbankCase(){
+        try {
+            StartPayment pay = new StartPayment();
+            pay.paySber(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
 

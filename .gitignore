@@ -1,6 +1,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/maven,java,test,git,gitbook,windows,intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=maven,java,test,git,gitbook,windows,intellij
-
+/.idea
 /allure-results
 ### Git ###
 # Created by git for backups. To disable backups in Git:

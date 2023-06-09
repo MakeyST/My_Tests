@@ -24,8 +24,8 @@ public class SettingSystemLanguage {
     String SystemLanguage = "//button[@class=\"select-box__main\"]";
     String SelectboxLanguage = "//a[@class=\"select-box__item\"]";
     String LookLanguage = "//button[@class=\"select-box__main\"]";
-    public void settingSystemLanguage (WebDriver driver) throws InterruptedException {
-        driver.get(GetXProfilePROD);
+    public void settingSystemLanguage (WebDriver driver) throws InterruptedException, IOException {
+        driver.get(GetXProfileTest);
         SoftAssert t = new SoftAssert();
         Date dateNow = new Date();
         SimpleDateFormat format = new SimpleDateFormat("dd_MM_hh_mm_ss");
@@ -37,15 +37,15 @@ public class SettingSystemLanguage {
         } catch (IOException e){e.printStackTrace();}
 
         //Настройка профиля: "Аккаунт", "Настройки", "Доступ", "История"
-        Thread.sleep(500);
+        Thread.sleep(700);
         driver.findElements(By.xpath(Setting)).get(0).click();
 
         //Выбор языка системы
-        Thread.sleep(500);
+        Thread.sleep(700);
         driver.findElements(By.xpath(SystemLanguage)).get(0).click();
 
         //Выбор в селектбоксе
-        Thread.sleep(500);
+        Thread.sleep(700);
         driver.findElements(By.xpath(SelectboxLanguage)).get(0).click();
 
         //Проверка какой язык установлен
@@ -56,19 +56,16 @@ public class SettingSystemLanguage {
         t.assertNotNull(TextSystemENG);
         System.out.println("*Проверка English системы [ENG], ---> выполнено*");
 
-        //После
-        try {
-            FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
-        } catch (IOException e){e.printStackTrace();}
+        FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
 
 
         //Обратная проверка (возвращаем RUS)
         //Выбор языка системы
-        Thread.sleep(500);
+        Thread.sleep(700);
         driver.findElements(By.xpath(SystemLanguage)).get(0).click();
 
         //Выбор в селектбоксе
-        Thread.sleep(500);
+        Thread.sleep(700);
         driver.findElements(By.xpath(SelectboxLanguage)).get(0).click();
 
         //Проверка какой язык установлен
@@ -79,10 +76,7 @@ public class SettingSystemLanguage {
         t.assertNotNull(TextSystemRUS);
         System.out.println("*Проверка Русский системы [RUS], ---> выполнено*");
 
-        //После
-        try {
-            FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
-        } catch (IOException e){e.printStackTrace();}
+        FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
 
         Allure.attachment("Dynamic attachment", "attachment content");
         t.assertAll();
