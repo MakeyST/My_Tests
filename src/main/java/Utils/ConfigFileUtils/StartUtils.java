@@ -4,6 +4,9 @@ import Utils.Authorization;
 import io.qameta.allure.Owner;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
+
 @Owner("Makeenkov Igor")
 public class StartUtils {
     @Test(alwaysRun = true)
@@ -11,6 +14,8 @@ public class StartUtils {
         try {
             Authorization authorization = new Authorization();
             authorization.authorization(driver);
-        } catch (InterruptedException e) {e.printStackTrace();}
+        } catch (InterruptedException e) {e.printStackTrace();} catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

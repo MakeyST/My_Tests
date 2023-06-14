@@ -2,11 +2,13 @@ package ProfileUser;
 
 import io.qameta.allure.Allure;
 import io.qameta.allure.Owner;
+import io.qameta.allure.model.Status;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
 import ru.yandex.qatools.allure.annotations.Description;
 
@@ -14,6 +16,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static io.qameta.allure.Allure.step;
 
 @Owner("Makeenkov Igor")
 @Description("Промокоды в профиле юзера")
@@ -33,10 +37,12 @@ public class SettingPromoCode {
         File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 
         //Клик по полю ввода промокода + ввод промокода
+        step("Клик по полю ввода промокода + ввод промокода", Status.PASSED);
         driver.findElement(By.xpath(InputPromoCode)).sendKeys(promo);
         Thread.sleep(500);
 
         //Проверка введенного промокода
+        step("Проверка введенного промокода", Status.PASSED);
         String TextPromoCode =  driver.findElement(By.xpath(InputPromoCode)).getAttribute("value");
         String ExpectedPromoCode = "482IE334JPWGI1GRFSO1";
         t.assertEquals(TextPromoCode, ExpectedPromoCode, "Проверка поля Промокод, ПРОВАЛЕНА!");
@@ -44,12 +50,12 @@ public class SettingPromoCode {
         System.out.println("*Проверка поля Промокод, ---> выполнено*");
 
         //Применить
+        step("Применить", Status.PASSED);
         driver.findElement(By.xpath(ApplyPromoCode)).click();
         Thread.sleep(400);
 
         FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
-
-        Allure.attachment("Dynamic attachment", "attachment content");
+        Allure.attachment("Настройки, промокод", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
         t.assertAll();
     }
 }

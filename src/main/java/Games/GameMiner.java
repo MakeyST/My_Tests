@@ -2,8 +2,10 @@ package Games;
 
 import io.qameta.allure.Allure;
 import io.qameta.allure.Owner;
+import io.qameta.allure.model.Status;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
 import ru.yandex.qatools.allure.annotations.Description;
 
@@ -11,6 +13,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static io.qameta.allure.Allure.step;
 
 @Owner("Makeenkov Igor")
 @Description("Игра Минер")
@@ -33,12 +37,12 @@ public class GameMiner {
         File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 
         //До
-        try {
-            FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
-        } catch (IOException e){e.printStackTrace();}
+        FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
 
         //Выставляем колличество бомб (кнопки) + проверяем, что выбралось нужное
+        step("Выставляем колличество бомб (кнопки) + проверяем, что выбралось нужное", Status.PASSED);
         //5 бомб
+        step("5 бомб", Status.PASSED);
         driver.findElements(By.xpath(NumberofBombs)).get(0).click(); //5 бомб клик
         Thread.sleep(800);
             String TextFiveBomb =  driver.findElement(By.xpath(BOmbsNamberFrom5Before24)).getText();
@@ -48,6 +52,7 @@ public class GameMiner {
         System.out.println("*Проверка кнопки №5, выбора кол-во бомб, ---> выполнено*");
 
         //10 бомб
+        step("10 бомб", Status.PASSED);
         driver.findElements(By.xpath(NumberofBombs)).get(1).click(); //10 бомб клик
         Thread.sleep(800);
             String TextTenBomb =  driver.findElement(By.xpath(BOmbsNamberFrom5Before24)).getText();
@@ -57,6 +62,7 @@ public class GameMiner {
         System.out.println("*Проверка кнопки №10, выбора кол-во бомб, ---> выполнено*");
 
         //16 бомб
+        step("16 бомб", Status.PASSED);
         driver.findElements(By.xpath(NumberofBombs)).get(2).click(); //16 бомб клик
         Thread.sleep(800);
             String TextSixteenBomb =  driver.findElement(By.xpath(BOmbsNamberFrom5Before24)).getText();
@@ -66,6 +72,7 @@ public class GameMiner {
         System.out.println("*Проверка кнопки №16, выбора кол-во бомб, ---> выполнено*");
 
         //24 бомбы
+        step("24 бомбы", Status.PASSED);
         driver.findElements(By.xpath(NumberofBombs)).get(3).click(); //24 бомб клик
         Thread.sleep(800);
             String TextTwentyFourBomb =  driver.findElement(By.xpath(BOmbsNamberFrom5Before24)).getText();
@@ -75,6 +82,7 @@ public class GameMiner {
         System.out.println("*Проверка кнопки №24, выбора кол-во бомб, ---> выполнено*");
 
         //Выставляем свое колличество бомб (без кнопок) + проверяем, что выбралось нужное
+        step("Выставляем свое колличество бомб (без кнопок) + проверяем, что выбралось нужное", Status.PASSED);
         driver.findElements(By.xpath(AnotherInput)).get(0).sendKeys(Keys.CONTROL,"a");
         Thread.sleep(600);
         driver.findElements(By.xpath(AnotherInput)).get(0).sendKeys("4");
@@ -86,22 +94,26 @@ public class GameMiner {
         System.out.println("*Проверка кнопки №4, выбора кол-во бомб, ---> выполнено*");
 
         //Жмем "Играть"
+        step("Жмем \"Играть\"", Status.PASSED);
         driver.findElements(By.xpath(PlayMiner)).get(0).click();
         Thread.sleep(600);
 
         //Выбор ячейки 23
+        step("Выбор ячейки 23", Status.PASSED);
         driver.findElements(By.xpath(OpenaCell)).get(22).click();
         Thread.sleep(600);
 
         //После
+        step("После скриншот", Status.PASSED);
         FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
 
 
-        //Забрать приз. Есть косяк, позже буду переписывать пару моментов с ветвлением. Чтобы проверялось условие. Если выйграл, то забрал, если нет, то завершаем тест.
+        //Забрать приз. Если выйграл, то забрал, если нет, то завершаем тест.
+        step("Забрать приз", Status.PASSED);
         driver.findElements(By.xpath(WinMinerPlay)).get(0).click();
         Thread.sleep(400);
 
-        Allure.attachment("Dynamic attachment", "attachment content");
+        Allure.attachment("Минер отчет", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
         t.assertAll();
     }
 }

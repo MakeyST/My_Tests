@@ -5,6 +5,7 @@ import QuickGames.ConfigFileQuickGames.StartQuickGames;
 import Utils.ConfigFileUtils.StartUtils;
 import Utils.RegressDriver;
 import io.qameta.allure.*;
+import io.qameta.allure.model.Status;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeSuite;
@@ -12,6 +13,8 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+
+import static io.qameta.allure.Allure.step;
 
 
 public class START {
@@ -23,6 +26,7 @@ public class START {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Запускаются как отдельно, так и все вместе, зависимости между кейсами отсутсвуют")
     public void Start() {
+        step("Кофниг, запуск", Status.PASSED);
 
         System.setProperty(
                 "webdriver.chrome.driver",
@@ -42,6 +46,7 @@ public class START {
     public void WindowProfit() {
         System.setProperty("webdriver.http.factory", "jdk-http-client");
         driver.manage().window().maximize();
+        step("Развернуть окно + Авторизация", Status.PASSED);
         try {
             StartUtils auth = new StartUtils();
             auth.Authorization(driver);
@@ -53,6 +58,7 @@ public class START {
     @Step("Смена никнейма")
     @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "Profile")
     public void SettingNiknameENGRUS(){
+        step("Смена никнейма", Status.PASSED);
         try {
             StartProfileUser spu = new StartProfileUser();
             spu.nicknameEngRus(driver);
@@ -61,6 +67,7 @@ public class START {
     @Step("Смена языка системы")
     @Test(alwaysRun = true, priority = 2, invocationCount = 1, groups = "Profile")
     public void SettingSystemlanguage(){
+        step("Смена языка системы", Status.PASSED);
         try {
             StartProfileUser spu = new StartProfileUser();
             spu.systemLanguage(driver);
@@ -69,6 +76,7 @@ public class START {
     @Step("Использование промокода")
     @Test(alwaysRun = true, priority = 3, invocationCount = 1, groups = "Profile")
     public void SettingPromoCode(){
+        step("Использование промокода", Status.PASSED);
         try {
             StartProfileUser spu = new StartProfileUser();
             spu.settingsPromoCode(driver);
@@ -79,6 +87,7 @@ public class START {
     @Description("Пока не готово, в планах, будет делать скрины, что промокод активирован")
     @Test(alwaysRun = true, priority = 4, invocationCount = 1, groups = "Profile")
     public void SettingControlPromoCode(){
+        step("Проверка введенного промокода", Status.PASSED);
         try {
             StartProfileUser spu = new StartProfileUser();
             spu.controlPromocode(driver);
@@ -87,6 +96,7 @@ public class START {
     @Step("Смена пароля")
     @Test(alwaysRun = true, priority = 5, invocationCount = 1, groups = "Profile")
     public void SettingPassword (){
+        step("Смена пароля", Status.PASSED);
         try {
             StartProfileUser spu = new StartProfileUser();
             spu.settingsPassword(driver);
@@ -95,6 +105,7 @@ public class START {
     @Step("Возврат прошлого пароля")
     @Test(alwaysRun = true, priority = 6, invocationCount = 1, groups = "Profile")
     public void SettingPasswordBack (){
+        step("Возврат прошлого пароля", Status.PASSED);
         try {
             StartProfileUser spu = new StartProfileUser();
             spu.settingsPasswordBack(driver);
@@ -107,6 +118,7 @@ public class START {
     @Severity(SeverityLevel.CRITICAL)
     @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "Miner")
     public void GamesMiner(){
+        step("Игра Минер", Status.PASSED);
         try {
             StartGames Games = new StartGames();
             Games.miner(driver);
@@ -115,8 +127,10 @@ public class START {
 
     @Feature("БЫСТРЫЕ ИГРЫ")
     @Owner("Makeenkov Igor")
+    @Step("Быстрая игра Минер")
     @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "FastMiner")
     public void QuickGamesMiner(){
+        step("Быстрая игра Минер", Status.PASSED);
         try {
             StartQuickGames GamesFast = new StartQuickGames();
             GamesFast.quickMiner(driver);
@@ -124,9 +138,11 @@ public class START {
 
     @Feature("СПОСОБЫ ОПЛАТЫ")
     @Owner("Makeenkov Igor")
+    @Step("Оплата Сбербанк")
     @Severity(SeverityLevel.CRITICAL)
     @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "Payment")
     public void PaymentSberbankCase(){
+        step("Оплата Сбербанк", Status.PASSED);
         try {
             StartPayment pay = new StartPayment();
             pay.paySber(driver);
@@ -138,6 +154,7 @@ public class START {
     @Owner("Makeenkov Igor")
     @Test(description = "Выход из теста", groups = "Quit")
     public void QUITUp() throws IOException {
+        step("Выход с теста", Status.PASSED);
         driver.quit();
     }
 
