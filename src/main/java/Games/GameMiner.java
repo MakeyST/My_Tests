@@ -113,7 +113,9 @@ public class GameMiner {
         driver.findElements(By.xpath(WinMinerPlay)).get(0).click();
         Thread.sleep(400);
 
-        //
+
+
+
 
         Allure.attachment("Минер отчет", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
         t.assertAll();
