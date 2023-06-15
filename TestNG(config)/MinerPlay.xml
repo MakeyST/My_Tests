@@ -3,6 +3,7 @@
 
 <suite name = "All groups">
 
+
     <!--Старт-->
     <test name="StartThis">
         <groups>
