@@ -1,6 +1,7 @@
 package Games;
 
 import io.qameta.allure.Allure;
+import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
 import io.qameta.allure.model.Status;
 import org.apache.commons.io.FileUtils;
@@ -15,7 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static io.qameta.allure.Allure.step;
-
+@Link(name = "Test", type = "https://s01getx.click/profile")
+@Link(name = "Prod", type = "https://get22.cfd/profile")
 @Owner("Makeenkov Igor")
 @Description("Игра Минер")
 public class GameMiner {
@@ -94,7 +96,7 @@ public class GameMiner {
         System.out.println("*Проверка кнопки №4, выбора кол-во бомб, ---> выполнено*");
 
         //Жмем "Играть"
-        step("Жмем \"Играть\"", Status.PASSED);
+        step("Жмем Играть", Status.PASSED);
         driver.findElements(By.xpath(PlayMiner)).get(0).click();
         Thread.sleep(600);
 

@@ -16,32 +16,40 @@ import java.io.IOException;
 
 import static io.qameta.allure.Allure.step;
 
-
 public class START {
+    String PlatformName = "Windows 10 Pro";
+    String BrowserVersion = "113.0.5672.127";
+    String WindowSize = "start-maximized";
+    String BrowserMode = "incognito";
     public static WebDriver driver;
     //Система
-    @BeforeSuite(description = "Путь к драйверу + все опции и аргументы", inheritGroups = true, groups = {"StartThis", "Profile", "Miner", "Quit", "Payment"})
     @Feature("Фаил запуска кейсов")
     @Owner("Makeenkov Igor")
-    @Severity(SeverityLevel.CRITICAL)
     @Description("Запускаются как отдельно, так и все вместе, зависимости между кейсами отсутсвуют")
+    @Severity(SeverityLevel.CRITICAL)
+    @BeforeSuite(description = "Путь к драйверу + все опции и аргументы", inheritGroups = true, groups = {"StartThis", "Profile", "Miner", "Quit", "Payment"})
     public void Start() {
         step("Кофниг, запуск", Status.PASSED);
 
+        step("Путь к драйверу", Status.PASSED);
         System.setProperty(
                 "webdriver.chrome.driver",
                 "C:\\chromedriver113.0.5672.127.exe"
         );
 
+        step("Настройки бразуера", Status.PASSED);
         ChromeOptions browserOptions = new ChromeOptions();
-        browserOptions.setPlatformName("Windows 10 Pro");
-        browserOptions.setBrowserVersion("113.0.5672.127");
-        browserOptions.addArguments("start-maximized");
-        browserOptions.addArguments("incognito");
+        browserOptions.setPlatformName(PlatformName);
+        browserOptions.setBrowserVersion(BrowserVersion);
+        browserOptions.addArguments(WindowSize);
+        browserOptions.addArguments(BrowserMode);
         driver = RegressDriver.getDriver();
         System.out.println("Драйвер ===>ON");
     }
-
+    @Owner("Makeenkov Igor")
+    @Feature("Авторизация + настройки браузера")
+    @Description("Настройка браузера, открыть в полном окне и пройти авторизацию")
+    @Severity(SeverityLevel.CRITICAL)
     @BeforeTest(description = "Развернуть окно + Авторизация", inheritGroups = true , groups = {"StartThis"})
     public void WindowProfit() {
         System.setProperty("webdriver.http.factory", "jdk-http-client");
@@ -56,7 +64,9 @@ public class START {
     @Epic("ПРОФИЛЬ ЮЗЕРА")
     @Owner("Makeenkov Igor")
     @Step("Смена никнейма")
-    @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "Profile")
+    @Description("Кейс смены никнейма")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "Profile", description = "Смена никнейма")
     public void SettingNiknameENGRUS(){
         step("Смена никнейма", Status.PASSED);
         try {
@@ -65,7 +75,10 @@ public class START {
         } catch (Exception e) {throw new RuntimeException(e);}}
 
     @Step("Смена языка системы")
-    @Test(alwaysRun = true, priority = 2, invocationCount = 1, groups = "Profile")
+    @Owner("Makeenkov Igor")
+    @Description("Кейс смены языка системы англ + рус")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(alwaysRun = true, priority = 2, invocationCount = 1, groups = "Profile", description = "Смена языка системы")
     public void SettingSystemlanguage(){
         step("Смена языка системы", Status.PASSED);
         try {
@@ -74,7 +87,10 @@ public class START {
         }catch (Exception e) {throw new RuntimeException(e);}}
 
     @Step("Использование промокода")
-    @Test(alwaysRun = true, priority = 3, invocationCount = 1, groups = "Profile")
+    @Owner("Makeenkov Igor")
+    @Description("Кейс использования промокода")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(alwaysRun = true, priority = 3, invocationCount = 1, groups = "Profile", description = "Использование промокода")
     public void SettingPromoCode(){
         step("Использование промокода", Status.PASSED);
         try {
@@ -83,9 +99,10 @@ public class START {
         }catch (Exception e) {throw new RuntimeException(e);}}
 
     @Step("Проверка введенного промокода")
-    @Severity(SeverityLevel.NORMAL)
+    @Owner("Makeenkov Igor")
     @Description("Пока не готово, в планах, будет делать скрины, что промокод активирован")
-    @Test(alwaysRun = true, priority = 4, invocationCount = 1, groups = "Profile")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(alwaysRun = true, priority = 4, invocationCount = 1, groups = "Profile", description = "Проверка введенного промокода")
     public void SettingControlPromoCode(){
         step("Проверка введенного промокода", Status.PASSED);
         try {
@@ -94,7 +111,10 @@ public class START {
         }catch (Exception e) {throw new RuntimeException(e);}}
 
     @Step("Смена пароля")
-    @Test(alwaysRun = true, priority = 5, invocationCount = 1, groups = "Profile")
+    @Owner("Makeenkov Igor")
+    @Description("Кейс смена пароля")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(alwaysRun = true, priority = 5, invocationCount = 1, groups = "Profile", description = "Смена пароля")
     public void SettingPassword (){
         step("Смена пароля", Status.PASSED);
         try {
@@ -103,7 +123,10 @@ public class START {
         }catch (Exception e) {throw new RuntimeException(e);}}
 
     @Step("Возврат прошлого пароля")
-    @Test(alwaysRun = true, priority = 6, invocationCount = 1, groups = "Profile")
+    @Owner("Makeenkov Igor")
+    @Description("Кейс возврата прошлого пароля, сделан для того, чтобы не было зависимости")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(alwaysRun = true, priority = 6, invocationCount = 1, groups = "Profile", description = "Возврат прошлого пароля")
     public void SettingPasswordBack (){
         step("Возврат прошлого пароля", Status.PASSED);
         try {
@@ -115,8 +138,9 @@ public class START {
     @Epic("ИГРА В МИНЕРА")
     @Owner("Makeenkov Igor")
     @Step("Игра Минер")
+    @Description("Кейс игры минер, пока не хвататет проверки условия, но позже допилю")
     @Severity(SeverityLevel.CRITICAL)
-    @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "Miner")
+    @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "Miner", description = "Игра Минер")
     public void GamesMiner(){
         step("Игра Минер", Status.PASSED);
         try {
@@ -128,7 +152,9 @@ public class START {
     @Feature("БЫСТРЫЕ ИГРЫ")
     @Owner("Makeenkov Igor")
     @Step("Быстрая игра Минер")
-    @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "FastMiner")
+    @Description("Чтобы не проходить полный кейс игры минер, этот кейс быстрые игры проводит, без проверки условий")
+    @Severity(SeverityLevel.NORMAL)
+    @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "FastMiner", description = "Быстрая игра Минер")
     public void QuickGamesMiner(){
         step("Быстрая игра Минер", Status.PASSED);
         try {
@@ -140,7 +166,7 @@ public class START {
     @Owner("Makeenkov Igor")
     @Step("Оплата Сбербанк")
     @Severity(SeverityLevel.CRITICAL)
-    @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "Payment")
+    @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "Payment", description = "Оплата Сбербанк")
     public void PaymentSberbankCase(){
         step("Оплата Сбербанк", Status.PASSED);
         try {
@@ -152,6 +178,7 @@ public class START {
     @Feature("ВЫХОД")
     @Step("Выход с теста")
     @Owner("Makeenkov Igor")
+    @Severity(SeverityLevel.NORMAL)
     @Test(description = "Выход из теста", groups = "Quit")
     public void QUITUp() throws IOException {
         step("Выход с теста", Status.PASSED);

@@ -1,10 +1,12 @@
 package QuickGames;
 
+import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.allure.annotations.Description;
-
+@Link(name = "Test", type = "https://s01getx.click/profile")
+@Link(name = "Prod", type = "https://get22.cfd/profile")
 @Owner("Makeenkov Igor")
 @Description("Быстрая игра Минер")
 public class MinerQuick {

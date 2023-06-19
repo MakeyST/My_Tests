@@ -1,6 +1,7 @@
 package Payment;
 
 import io.qameta.allure.Allure;
+import io.qameta.allure.Link;
 import io.qameta.allure.model.Status;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -13,7 +14,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static io.qameta.allure.Allure.step;
-
+@Link(name = "Test", type = "https://s01getx.click/profile")
+@Link(name = "Prod", type = "https://get22.cfd/profile")
 public class PaymentSberbank {
     String GetXProfileTest = "https://s01getx.click/";
     String GetXProfilePROD = "https://get22.cfd/";

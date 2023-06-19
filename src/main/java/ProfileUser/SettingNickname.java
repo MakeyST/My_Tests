@@ -1,6 +1,7 @@
 package ProfileUser;
 
 import io.qameta.allure.Allure;
+import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Step;
 import io.qameta.allure.model.Status;
@@ -19,6 +20,8 @@ import static io.qameta.allure.Allure.step;
 
 @Owner("Makeenkov Igor")
 @Description("Смена никнейма")
+@Link(name = "Test", type = "https://s01getx.click/profile")
+@Link(name = "Prod", type = "https://get22.cfd/profile")
 public class SettingNickname {
     String GetXProfileTest = "https://s01getx.click/profile";
     String GetXProfilePROD = "https://get22.cfd/profile";

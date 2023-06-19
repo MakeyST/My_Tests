@@ -1,11 +1,14 @@
 package Utils;
 
+import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
 import org.openqa.selenium.chrome.ChromeDriver;
 import ru.yandex.qatools.allure.annotations.Description;
 
 @Owner("Makeenkov Igor")
 @Description("Использования драйвера для запуска страницы")
+@Link(name = "Test", type = "https://s01getx.click/profile")
+@Link(name = "Prod", type = "https://get22.cfd/profile")
 public class RegressDriver {
 
     private static ChromeDriver _regressDriver;
