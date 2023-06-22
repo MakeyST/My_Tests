@@ -5,13 +5,13 @@ import io.qameta.allure.Owner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.allure.annotations.Description;
-@Link(name = "Test", type = "https://s01getx.click/profile")
-@Link(name = "Prod", type = "https://get22.cfd/profile")
+@Link(name = "Test", type = "https://ppgetx.click/games/miner")
+@Link(name = "Prod", type = "https://get22.cfd/games/miner")
 @Owner("Makeenkov Igor")
 @Description("Быстрая игра Минер")
 public class MinerQuick {
     String GetXMINERProd = "https://get22.cfd/games/miner";
-    String GetXMINERTest = "https://s01getx.click/games/miner/";
+    String GetXMINERTest = "https://ppgetx.click/games/miner/";
     String PlayMiner = "//button[@class=\"btn btn_full btn_long btn_can-cancel\"]";
     String OpenaCell = "//div[@class=\"miner_cell_container opened-cell\"]";
     String WinMiner = "//button[@class=\"btn btn_full btn_long btn_can-cancel btn-pick-up\"]";

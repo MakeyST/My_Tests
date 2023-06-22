@@ -22,8 +22,8 @@ import java.time.Duration;
 import java.util.Date;
 
 import static io.qameta.allure.Allure.step;
-@Link(name = "Test", type = "https://s01getx.click/profile")
-@Link(name = "Prod", type = "https://get22.cfd/profile")
+@Link(name = "Test", type = "https://ppgetx.click/")
+@Link(name = "Prod", type = "https://get22.cfd/")
 @Owner("Makeenkov Igor")
 @Description("Авторизация. Доступно несколько учетных записей, их нужно менять по необходимости")
 public class Authorization implements TestWatcher {
@@ -43,7 +43,7 @@ public class Authorization implements TestWatcher {
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
         //Клик "Войти"
-        step("Войти", Status.PASSED);
+        step("Открыть окно авторизации", () -> {driver.findElement(By.id("btn-login")).click();});
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(By.id("btn-login")).click();
 

@@ -16,12 +16,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static io.qameta.allure.Allure.step;
-@Link(name = "Test", type = "https://s01getx.click/profile")
+@Link(name = "Test", type = "https://ppgetx.click/profile")
 @Link(name = "Prod", type = "https://get22.cfd/profile")
 @Owner("Makeenkov Igor")
 @Description("Игра Минер")
 public class GameMiner {
-    String GetXMINER = "https://s01getx.click/games/miner";
+    String GetXMINER = "https://ppgetx.click/games/miner";
     String PlayMiner = "//button[@class=\"btn btn_full btn_long btn_can-cancel\"]";
     String WinMinerPlay = "//button[@class=\"btn btn_full btn_long btn_can-cancel btn-pick-up\"]";
     String NumberofBombs = "//button[@class=\"bit-feed__btn\"]";

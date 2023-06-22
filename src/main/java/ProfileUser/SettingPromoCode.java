@@ -19,12 +19,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static io.qameta.allure.Allure.step;
-@Link(name = "Test", type = "https://s01getx.click/profile")
+@Link(name = "Test", type = "https://ppgetx.click/profile")
 @Link(name = "Prod", type = "https://get22.cfd/profile")
 @Owner("Makeenkov Igor")
 @Description("Промокоды в профиле юзера")
 public class SettingPromoCode {
-    String GetXProfileTest = "https://s01getx.click/profile";
+    String GetXProfileTest = "https://ppgetx.click/profile";
     String GetXProfilePROD = "https://get22.cfd/profile";
     String InputPromoCode = "//input[@class=\"field field-group__field\"]";
     String promo = "482IE334JPWGI1GRFSO1";

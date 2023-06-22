@@ -7,14 +7,14 @@ import ru.yandex.qatools.allure.annotations.Description;
 
 @Owner("Makeenkov Igor")
 @Description("Использования драйвера для запуска страницы")
-@Link(name = "Test", type = "https://s01getx.click/profile")
-@Link(name = "Prod", type = "https://get22.cfd/profile")
+@Link(name = "Test", type = "https://ppgetx.click/")
+@Link(name = "Prod", type = "https://get22.cfd/")
 public class RegressDriver {
 
     private static ChromeDriver _regressDriver;
     public static ChromeDriver getDriver() {
         String PROD = "https://get22.cfd/";
-        String Test = "https://s01getx.click/";
+        String Test = "https://ppgetx.click";
         if (RegressDriver._regressDriver == null) {
             RegressDriver._regressDriver = new ChromeDriver();
             _regressDriver.get(Test);

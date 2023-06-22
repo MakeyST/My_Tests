@@ -20,10 +20,10 @@ import static io.qameta.allure.Allure.step;
 
 @Owner("Makeenkov Igor")
 @Description("Смена никнейма")
-@Link(name = "Test", type = "https://s01getx.click/profile")
+@Link(name = "Test", type = "https://ppgetx.click/profile")
 @Link(name = "Prod", type = "https://get22.cfd/profile")
 public class SettingNickname {
-    String GetXProfileTest = "https://s01getx.click/profile";
+    String GetXProfileTest = "https://ppgetx.click/profile";
     String GetXProfilePROD = "https://get22.cfd/profile";
     String Setting = "//a[@class=\"rc-tabs__link js-open-tab\"]";
     String Nickname = "//input[@class=\"field field-group__field\"]";

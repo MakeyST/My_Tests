@@ -19,12 +19,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static io.qameta.allure.Allure.step;
-@Link(name = "Test", type = "https://s01getx.click/profile")
+@Link(name = "Test", type = "https://ppgetx.click/profile")
 @Link(name = "Prod", type = "https://get22.cfd/profile")
 @Owner("Makeenkov Igor")
 @Description("Смена языка")
 public class SettingSystemLanguage {
-    String GetXProfileTest = "https://s01getx.click/profile";
+    String GetXProfileTest = "https://ppgetx.click/profile";
     String GetXProfilePROD = "https://get22.cfd/profile";
     String Setting = "//a[@class=\"rc-tabs__link js-open-tab\"]";
     String SystemLanguage = "//button[@class=\"select-box__main\"]";

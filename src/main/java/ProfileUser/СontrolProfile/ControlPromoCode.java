@@ -18,7 +18,7 @@ import java.util.Date;
 @Owner("Makeenkov Igor")
 @Description("Проверка, что промокод успешно активирован")
 public class ControlPromoCode {
-    String GetXProfileHistory = "https://s01getx.click/profile/history";
+    String GetXProfileHistory = "https://ppgetx.click/profile/history";
     String Bonuses = "//button[@class=\"button-group__link\"]";
 
     public void controlPromoCode (WebDriver driver) throws InterruptedException {

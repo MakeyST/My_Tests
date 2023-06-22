@@ -17,10 +17,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static io.qameta.allure.Allure.step;
-@Link(name = "Test", type = "https://s01getx.click/profile")
-@Link(name = "Prod", type = "https://get22.cfd/profile")
+@Link(name = "Test", type = "https://ppgetx.click/profile/setting")
+@Link(name = "Prod", type = "https://get22.cfd/profile/setting")
 public class SettingPassword {
-    String GetXProfileTest = "https://s01getx.click/profile/setting";
+    String GetXProfileTest = "https://ppgetx.click/profile/setting";
     String GetXProfilePROD = "https://get22.cfd/profile/setting";
     String InputOldPassword = "//input[@class=\"field field-group__field field_icon\"]";
     String OldPassword = "23Makey23";

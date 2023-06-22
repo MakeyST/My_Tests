@@ -14,10 +14,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static io.qameta.allure.Allure.step;
-@Link(name = "Test", type = "https://s01getx.click/profile")
-@Link(name = "Prod", type = "https://get22.cfd/profile")
+@Link(name = "Test", type = "https://ppgetx.click/")
+@Link(name = "Prod", type = "https://get22.cfd/")
 public class PaymentSberbank {
-    String GetXProfileTest = "https://s01getx.click/";
+    String GetXProfileTest = "https://ppgetx.click/";
     String GetXProfilePROD = "https://get22.cfd/";
     String Wallet = "//button[@class=\"btn btn_shadow headline__balance-btn\"]";
     String PaymentMethods = "//button[@class=\"pay__option js-wives-hover js-ven-wives\"]";
