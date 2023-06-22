@@ -31,9 +31,6 @@ public class PaymentSberbank {
 
     public void paymentSberbank (WebDriver driver) throws InterruptedException, IOException {
 
-        //Аллюр Аттач
-        Allure.attachment("Сбербанк отчет", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
-
         //Перейти на сайт
         step("Перейти на сайт", Status.PASSED);
         driver.get(GetXProfileTest);
@@ -137,11 +134,14 @@ public class PaymentSberbank {
 
         //Проверка ожидания платежа
         step("Проверка ожидания платежа", Status.PASSED);
-        String TextControlPayment =  driver.findElement(By.xpath(ControlPayment)).getAttribute("value");
-        String ExpectedControlPayment = "Мы ожидаем ваш платеж";
+        String TextControlPayment =  driver.findElement(By.xpath(ControlPayment)).getText();
+        String ExpectedControlPayment = "МЫ ОЖИДАЕМ ВАШ ПЛАТЕЖ";
         t.assertEquals(TextControlPayment, ExpectedControlPayment, "Проверка попапа оплаты сбера, ПРОВАЛЕНА!");
         t.assertNotNull(TextControlPayment);
         System.out.println("*Проверка попапа оплаты сбера, ---> выполнено*");
+
+        //Аллюр Аттач
+        Allure.attachment("Сбербанк отчет", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
 
         //Сбор данных по проверкам
         step("Сбор данных по проверкам", Status.PASSED);

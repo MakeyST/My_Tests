@@ -27,9 +27,7 @@ import static io.qameta.allure.Allure.step;
 @Owner("Makeenkov Igor")
 @Description("Авторизация. Доступно несколько учетных записей, их нужно менять по необходимости")
 public class Authorization implements TestWatcher {
-    //pro100igo228@gmail.com
     String LoginPro100igo228 = "pro100igo228@gmail.com";
-    //getxmakeystar@gmail.com
     String LoginGetxMakeyStar = "getxmakeystar@gmail.com";
     //Пароль от всех учеток мною созданых
     String PasswordALLUSERS = "23Makey23";
@@ -43,7 +41,7 @@ public class Authorization implements TestWatcher {
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
         //Клик "Войти"
-        step("Открыть окно авторизации", () -> {driver.findElement(By.id("btn-login")).click();});
+        step("Открыть окно авторизации", Status.PASSED);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(By.id("btn-login")).click();
 
@@ -85,6 +83,7 @@ public class Authorization implements TestWatcher {
                 ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
         FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
         Allure.attachment("Авторизация юзера через e-mail", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Thread.sleep(3000);
         t.assertAll();
     }
 }

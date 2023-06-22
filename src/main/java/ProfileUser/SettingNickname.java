@@ -41,27 +41,27 @@ public class SettingNickname {
         
         //Настройка профиля: "Аккаунт", "Настройки", "Доступ", "История"
         step("Настройка профиля: Аккаунт, Настройки, Доступ, История", Status.PASSED);
-        Thread.sleep(500);
+        Thread.sleep(900);
         driver.findElements(By.xpath(Setting)).get(0).click();
 
         //Ввод ENG никнейма
         step("Ввод ENG никнейма", Status.PASSED);
-        Thread.sleep(500);
+        Thread.sleep(900);
         driver.findElement(By.xpath(Nickname)).sendKeys(Keys.CONTROL,"a");
         driver.findElement(By.xpath(Nickname)).sendKeys(Keys.DELETE);
         driver.findElement(By.xpath(Nickname)).sendKeys("MakeyStar");
 
         //Клик "Сменить/Change"
         step("Клик Сменить/Change", Status.PASSED);
-        Thread.sleep(500);
+        Thread.sleep(900);
         driver.findElement(By.xpath(Change)).click();
-        Thread.sleep(500);
+        Thread.sleep(900);
         driver.navigate().refresh();
-        Thread.sleep(500);
+        Thread.sleep(900);
 
         //Проверка поля Никнейм (ENG)
         step("Проверка поля Никнейм (ENG)", Status.PASSED);
-        Thread.sleep(500);
+        Thread.sleep(900);
         String TextNicknameENG =  driver.findElement(By.xpath(Nickname)).getAttribute("value");
         String ExpectedNicknameENG = "MakeyStar";
         t.assertEquals(TextNicknameENG, ExpectedNicknameENG, "Проверка поля Никнейм ПРОВАЛЕНА![ENG]");
@@ -73,22 +73,22 @@ public class SettingNickname {
 
         //Ввод RUS никнейма
         step("Ввод RUS никнейма", Status.PASSED);
-        Thread.sleep(500);
+        Thread.sleep(900);
         driver.findElement(By.xpath(Nickname)).sendKeys(Keys.CONTROL,"a");
         driver.findElement(By.xpath(Nickname)).sendKeys(Keys.DELETE);
         driver.findElement(By.xpath(Nickname)).sendKeys("Игорь");
 
         //Клик "Сменить/Change"
         step("Клик Сменить/Change", Status.PASSED);
-        Thread.sleep(500);
+        Thread.sleep(900);
         driver.findElement(By.xpath(Change)).click();
-        Thread.sleep(500);
+        Thread.sleep(900);
         driver.navigate().refresh();
-        Thread.sleep(500);
+        Thread.sleep(900);
 
         //Проверка поля Никнейм (RUS)
         step("Проверка поля Никнейм (RUS)", Status.PASSED);
-        Thread.sleep(500);
+        Thread.sleep(900);
         String TextNicknameRUS =  driver.findElement(By.xpath(Nickname)).getAttribute("value");
         String ExpectedNicknameRUS = "Игорь";
         t.assertEquals(TextNicknameRUS, ExpectedNicknameRUS, "Проверка поля Никнейм ПРОВАЛЕНА![RUS]");

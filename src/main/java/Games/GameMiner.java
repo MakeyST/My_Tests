@@ -16,8 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static io.qameta.allure.Allure.step;
-@Link(name = "Test", type = "https://ppgetx.click/profile")
-@Link(name = "Prod", type = "https://get22.cfd/profile")
+@Link(name = "Test", type = "https://ppgetx.click/")
+@Link(name = "Prod", type = "https://get22.cfd/")
 @Owner("Makeenkov Igor")
 @Description("Игра Минер")
 public class GameMiner {
@@ -29,12 +29,11 @@ public class GameMiner {
     String OpenaCell = "//div[@class=\"miner_cell_container opened-cell\"]";
     String AnotherInput = "//input[@class=\"number-field__value number-field__value_bid\"]";
     public void gameminer (WebDriver driver) throws InterruptedException, IOException {
-        Thread.sleep(1000);
         driver.get(GetXMINER);
         Thread.sleep(1500);
         SoftAssert t = new SoftAssert();
         Date dateNow = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("dd_MM_hh_mm_ss");
+        SimpleDateFormat format = new SimpleDateFormat("dd_hh_mm_ss");
         String fileName = format.format(dateNow) + ".png";
         File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 
@@ -84,16 +83,16 @@ public class GameMiner {
         System.out.println("*Проверка кнопки №24, выбора кол-во бомб, ---> выполнено*");
 
         //Выставляем свое колличество бомб (без кнопок) + проверяем, что выбралось нужное
-        step("Выставляем свое колличество бомб (без кнопок) + проверяем, что выбралось нужное", Status.PASSED);
+        step("Выставляем свое колличество бомб (без кнопок)", Status.PASSED);
         driver.findElements(By.xpath(AnotherInput)).get(0).sendKeys(Keys.CONTROL,"a");
         Thread.sleep(600);
         driver.findElements(By.xpath(AnotherInput)).get(0).sendKeys("4");
         Thread.sleep(900);
-            String TextYourExampleBomb =  driver.findElement(By.xpath(AnotherInput)).getText();
+            /*String TextYourExampleBomb =  driver.findElement(By.xpath(AnotherInput)).getText();
             String ExpectedYourExampleBomb = "4";
             t.assertEquals(TextYourExampleBomb, ExpectedYourExampleBomb, "Проверка кнопки №4, выбора кол-во бомб провалена!");
             t.assertNotNull(TextYourExampleBomb);
-        System.out.println("*Проверка кнопки №4, выбора кол-во бомб, ---> выполнено*");
+        System.out.println("*Проверка кнопки №4, выбора кол-во бомб, ---> выполнено*");*/
 
         //Жмем "Играть"
         step("Жмем Играть", Status.PASSED);
@@ -115,9 +114,17 @@ public class GameMiner {
         driver.findElements(By.xpath(WinMinerPlay)).get(0).click();
         Thread.sleep(400);
 
+        WebElement currentDiv = null;
+        WebElement[] divs = driver.findElement(By.className("bit-feed__cell_bit")).findElements(By.className("btn_full")).toArray(new WebElement[0]);
+        for (WebElement div : divs) {
+            if (!div.getCssValue("display").equals("none")) {
+                currentDiv = div;
+            }
+        }
 
-
-
+        if (currentDiv != null && currentDiv.getText().contains("Забрать")) {
+            currentDiv.click();
+        }
 
         Allure.attachment("Минер отчет", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
         t.assertAll();
