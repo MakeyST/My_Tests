@@ -21,14 +21,13 @@ public class PaymentSberbank {
     String GetXProfilePROD = "https://get22.cfd/";
     String Wallet = "//button[@class=\"btn btn_shadow headline__balance-btn\"]";
     String PaymentMethods = "//button[@class=\"pay__option js-wives-hover js-ven-wives\"]";
-    String ClickMinus = "//button[@class=\"number-field__btn number-field__btn_minus\"]";
-    String ClickPlus = "//button[@class=\"number-field__btn number-field__btn_plus\"]";
-    String InputDepositAmount = "//input[@class=\"number-field__value number-field__value_bid amount\"]";
-    String PromoCode = "//input[@class=\"field field-group__field\"]";
-    String TestPromoCode = "123TestTest123";
+    String DepositAmount = "//input[@class=\"field field-group__field amount\"]";
+    String ButtonPromoCode = "//div[@class=\"giftbox\"]";
+    String ButtonDeposit = "//button[@class=\"bit-feed__btn\"]";
+    String TestPromoCode = "PROMOCODETEST";
+    String InputPromoCode = "//input[@class=\"field field-group__field\"]";
     String Continue = "//button[@class=\"btn btn_big btn_shadow\"]";
     String ControlPayment = "//div[@class=\"transfer-timer__label\"]";
-
     public void paymentSberbank (WebDriver driver) throws InterruptedException, IOException {
 
         //Перейти на сайт
@@ -49,79 +48,128 @@ public class PaymentSberbank {
         driver.findElements(By.xpath(PaymentMethods)).get(0).click();
         Thread.sleep(300);
 
-        //Выбор суммы: Кнопка +
-        step("Выбор суммы: Кнопка +", Status.PASSED);
-        driver.findElement(By.xpath(ClickPlus)).click();
+        //Ручной ввод суммы
+        step("Ручной ввод суммы", Status.PASSED);
+        driver.findElement(By.xpath(DepositAmount)).click();
+        driver.findElement(By.xpath(DepositAmount)).sendKeys(Keys.CONTROL,"a");
+        driver.findElement(By.xpath(DepositAmount)).sendKeys(Keys.DELETE);
+        driver.findElement(By.xpath(DepositAmount)).sendKeys("200");
         Thread.sleep(200);
-
-        //Проверка суммы +
-        step("Проверка суммы +", Status.PASSED);
-        String TextClickPlus =  driver.findElement(By.xpath(InputDepositAmount)).getAttribute("value");
-        String ExpectedClickPlus = "110";
-        t.assertEquals(TextClickPlus, ExpectedClickPlus, "Проверка поля Cуммы +1руб ПРОВАЛЕНА!");
-        t.assertNotNull(TextClickPlus);
-        System.out.println("*Проверка поля Cуммы +1руб, ---> выполнено*");
-
-        //Выбор суммы: Кнопка -
-        step("Выбор суммы: Кнопка -", Status.PASSED);
-        driver.findElement(By.xpath(ClickMinus)).click();
-        Thread.sleep(200);
-
-        //Проверка суммы -
-        step("Проверка суммы -", Status.PASSED);
-        String TextClickMinus =  driver.findElement(By.xpath(InputDepositAmount)).getAttribute("value");
-        String ExpectedClickMinus = "100";
-        t.assertEquals(TextClickMinus, ExpectedClickMinus, "Проверка поля Cуммы -1руб ПРОВАЛЕНА!");
-        t.assertNotNull(TextClickMinus);
-        System.out.println("*Проверка поля Cуммы -1руб, ---> выполнено*");
-
-        //Выбор суммы ручной
-        step("Выбор суммы ручной", Status.PASSED);
-        driver.findElement(By.xpath(InputDepositAmount)).sendKeys(Keys.CONTROL,"a");
-        driver.findElement(By.xpath(InputDepositAmount)).sendKeys(Keys.DELETE);
-        driver.findElement(By.xpath(InputDepositAmount)).sendKeys("150");
-        Thread.sleep(1000);
 
         //Проверка ручного ввода суммы
         step("Проверка ручного ввода суммы", Status.PASSED);
-        String TextDepositAmount =  driver.findElement(By.xpath(InputDepositAmount)).getAttribute("value");
-        String ExpectedDepositAmount = "150";
-        t.assertEquals(TextDepositAmount, ExpectedDepositAmount, "Проверка поля Cуммы 150руб ПРОВАЛЕНА!");
-        t.assertNotNull(TextDepositAmount);
-        System.out.println("*Проверка поля Cуммы 150руб, ---> выполнено*");
+        String TextDep200 =  driver.findElement(By.xpath(DepositAmount)).getAttribute("value");
+        String ExpectedDep200 = "200";
+        t.assertEquals(TextDep200, ExpectedDep200, "Проверка ручного ввода суммы 200руб ПРОВАЛЕНА!");
+        t.assertNotNull(TextDep200);
+        System.out.println("*Проверка ручного ввода суммы 200руб, ---> выполнено*");
+
+        //Кнопка 200
+        step("Кнопка 200", Status.PASSED);
+        driver.findElements(By.xpath(ButtonDeposit)).get(0).click();
+        Thread.sleep(200);
+        //Проверка кнопки 200
+        step("Проверка кнопки 200руб", Status.PASSED);
+        String TextClick200 =  driver.findElement(By.xpath(DepositAmount)).getAttribute("value");
+        String ExpectedClick200 = "200";
+        t.assertEquals(TextClick200, ExpectedClick200, "Проверка кнопки 200руб ПРОВАЛЕНА!");
+        t.assertNotNull(TextClick200);
+        System.out.println("*Проверка кнопки 200руб, ---> выполнено*");
+
+        //Кнопка 500
+        step("Кнопка 500", Status.PASSED);
+        driver.findElements(By.xpath(ButtonDeposit)).get(1).click();
+        Thread.sleep(200);
+        //Проверка кнопки 500
+        step("Проверка кнопки 500", Status.PASSED);
+        String TextClick500 =  driver.findElement(By.xpath(DepositAmount)).getAttribute("value");
+        String ExpectedClick500 = "500";
+        t.assertEquals(TextClick500, ExpectedClick500, "Проверка кнопки 500руб ПРОВАЛЕНА!");
+        t.assertNotNull(TextClick500);
+        System.out.println("*Проверка кнопки 500руб, ---> выполнено*");
+
+        //Кнопка 1000
+        step("Кнопка 1000", Status.PASSED);
+        driver.findElements(By.xpath(ButtonDeposit)).get(2).click();
+        Thread.sleep(200);
+        //Проверка кнопки 1000
+        step("Проверка кнопки 1000", Status.PASSED);
+        String TextClick1000 =  driver.findElement(By.xpath(DepositAmount)).getAttribute("value");
+        String ExpectedClick1000 = "1000";
+        t.assertEquals(TextClick1000, ExpectedClick1000, "Проверка кнопки 1000руб ПРОВАЛЕНА!");
+        t.assertNotNull(TextClick1000);
+        System.out.println("*Проверка кнопки 1000руб, ---> выполнено*");
+
+        //Кнопка 2500
+        step("Кнопка 2500", Status.PASSED);
+        driver.findElements(By.xpath(ButtonDeposit)).get(3).click();
+        Thread.sleep(200);
+        //Проверка кнопки 2500
+        step("Проверка кнопки 2500", Status.PASSED);
+        String TextClick2500 =  driver.findElement(By.xpath(DepositAmount)).getAttribute("value");
+        String ExpectedClick2500 = "2500";
+        t.assertEquals(TextClick2500, ExpectedClick2500, "Проверка кнопки 2500руб ПРОВАЛЕНА!");
+        t.assertNotNull(TextClick2500);
+        System.out.println("*Проверка кнопки 2500руб, ---> выполнено*");
+
+        //Кнопка 5000
+        step("Кнопка 5000", Status.PASSED);
+        driver.findElements(By.xpath(ButtonDeposit)).get(4).click();
+        Thread.sleep(200);
+        //Проверка кнопки 5000
+        step("Проверка кнопки 5000", Status.PASSED);
+        String TextClick5000 =  driver.findElement(By.xpath(DepositAmount)).getAttribute("value");
+        String ExpectedClick5000 = "5000";
+        t.assertEquals(TextClick5000, ExpectedClick5000, "Проверка кнопки 5000руб ПРОВАЛЕНА!");
+        t.assertNotNull(TextClick5000);
+        System.out.println("*Проверка кнопки 5000руб, ---> выполнено*");
+
+        //Кнопка 10 000
+        step("Кнопка 10 000", Status.PASSED);
+        driver.findElements(By.xpath(ButtonDeposit)).get(5).click();
+        Thread.sleep(200);
+        //Проверка кнопки 10 000
+        step("Проверка кнопки 10 000", Status.PASSED);
+        String TextClick10000 =  driver.findElement(By.xpath(DepositAmount)).getAttribute("value");
+        String ExpectedClick10000 = "10000";
+        t.assertEquals(TextClick10000, ExpectedClick10000, "Проверка кнопки 10 000руб ПРОВАЛЕНА!");
+        t.assertNotNull(TextClick10000);
+        System.out.println("*Проверка кнопки 10 000руб, ---> выполнено*");
+
+        //Кнопка 20 000
+        step("Кнопка 20 000", Status.PASSED);
+        driver.findElements(By.xpath(ButtonDeposit)).get(6).click();
+        Thread.sleep(200);
+        //Проверка кнопки 20 000
+        step("Проверка кнопки 20000руб", Status.PASSED);
+        String TextClick20000 =  driver.findElement(By.xpath(DepositAmount)).getAttribute("value");
+        String ExpectedClick20000 = "20000";
+        t.assertEquals(TextClick20000, ExpectedClick20000, "Проверка кнопки 20 000руб ПРОВАЛЕНА!");
+        t.assertNotNull(TextClick20000);
+        System.out.println("*Проверка кнопки 20 000руб, ---> выполнено*");
+
+        //Нажать кнопку: "У меня есть промокод"
+        step("Нажать кнопку: У меня есть промокод", Status.PASSED);
+        driver.findElement(By.xpath(ButtonPromoCode)).click();
+        Thread.sleep(300);
 
         //Ввод промокода (Test работоспособности поля)
         step("Ввод промокода (Test работоспособности поля)", Status.PASSED);
-        driver.findElement(By.xpath(PromoCode)).sendKeys(TestPromoCode);
+        driver.findElement(By.xpath(InputPromoCode)).sendKeys(TestPromoCode);
         Thread.sleep(150);
 
         //Проверка поля промокод
         step("Проверка поля промокод", Status.PASSED);
-        String TextPromoCode =  driver.findElement(By.xpath(PromoCode)).getAttribute("value");
-        String ExpectedPromoCode = "123TestTest123";
+        String TextPromoCode =  driver.findElement(By.xpath(InputPromoCode)).getAttribute("value");
+        String ExpectedPromoCode = "PROMOCODETEST";
         t.assertEquals(TextPromoCode, ExpectedPromoCode, "Проверка поля Промокод, ПРОВАЛЕНА!");
         t.assertNotNull(TextPromoCode);
         System.out.println("*Проверка поля Промокод, ---> выполнено*");
 
-        //Удаление промокода
-        step("Удаление промокода", Status.PASSED);
-        Thread.sleep(150);
-        driver.findElement(By.xpath(PromoCode)).sendKeys(Keys.CONTROL,"a");
-        driver.findElement(By.xpath(PromoCode)).sendKeys(Keys.DELETE);
-        Thread.sleep(150);
-
-        //Проверка, удаления промокода
-        step("Проверка, удаления промокода", Status.PASSED);
-        String TextPromoCodeDelete =  driver.findElement(By.xpath(PromoCode)).getAttribute("value");
-        String ExpectedPromoCodeDelete = "";
-        t.assertEquals(TextPromoCodeDelete, ExpectedPromoCodeDelete, "Проверка поля Промокод (удаление), ПРОВАЛЕНА!");
-        t.assertNotNull(TextPromoCodeDelete);
-        System.out.println("*Проверка поля Промокод(удаление), ---> выполнено*");
-
-        //Жмем "Оплатить"
-        step("Жмем Оплатить", Status.PASSED);
+        //Нажать кнопку: "Продолжить"
+        step("Нажать кнопку: Продолжить", Status.PASSED);
         driver.findElement(By.xpath(Continue)).click();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         //Скриншот
         step("Скриншот", Status.PASSED);

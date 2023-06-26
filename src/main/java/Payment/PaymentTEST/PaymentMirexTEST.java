@@ -1,4 +1,4 @@
-package Payment;
+package Payment.PaymentTEST;
 
 import io.qameta.allure.Link;
 
