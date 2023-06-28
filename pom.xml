@@ -15,7 +15,19 @@
         <extentreports-version>5.0.8</extentreports-version>
     </properties>
 
+    <!-- Все dependency беру тут: https://mvnrepository.com/ -->
     <dependencies>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>5.3.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-rest-assured</artifactId>
+            <version>2.22.0</version>
+        </dependency>
         <dependency>
             <groupId>ru.yandex.qatools.ashot</groupId>
             <artifactId>ashot</artifactId>

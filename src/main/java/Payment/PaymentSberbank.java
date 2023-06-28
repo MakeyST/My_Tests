@@ -34,6 +34,8 @@ public class PaymentSberbank {
         step("Перейти на сайт", Status.PASSED);
         driver.get(GetXProfileTest);
         Thread.sleep(1000);
+        driver.navigate().refresh();
+        Thread.sleep(1000);
 
         //Проверки
         SoftAssert t = new SoftAssert();

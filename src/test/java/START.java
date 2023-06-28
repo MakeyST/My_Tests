@@ -44,7 +44,9 @@ public class START {
         browserOptions.addArguments(WindowSize);
         browserOptions.addArguments(BrowserMode);
         driver = RegressDriver.getDriver();
-        System.out.println("Драйвер ===>ON");
+        step("Чистим куки при запуске", Status.PASSED);
+        driver.manage().deleteAllCookies(); // Чистим куки
+        step("Драйвер ===> ON", Status.PASSED);
     }
     @Owner("Makeenkov Igor")
     @Feature("Авторизация + настройки браузера")
@@ -135,7 +137,7 @@ public class START {
         }catch (Exception e) {throw new RuntimeException(e);}}
 
 
-    @Epic("ИГРА В МИНЕРА")
+    @Epic("ИГРЫ")
     @Owner("Makeenkov Igor")
     @Step("Игра Минер")
     @Description("Кейс игры минер, пока не хвататет проверки условия, но позже допилю")
@@ -172,6 +174,50 @@ public class START {
         try {
             StartPayment pay = new StartPayment();
             pay.paySber(driver);
+        }catch (Exception e) {throw new RuntimeException(e);}}
+
+    @Owner("Makeenkov Igor")
+    @Step("Оплата QIWI")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "Payment", description = "Оплата QIWI")
+    public void PaymentQIWI(){
+        step("Оплата QIWI", Status.PASSED);
+        try {
+            StartPayment pay = new StartPayment();
+            pay.payQIWI(driver);
+        }catch (Exception e) {throw new RuntimeException(e);}}
+
+    @Owner("Makeenkov Igor")
+    @Step("Оплата СБП")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "Payment", description = "Оплата СБП")
+    public void PaymentSBP(){
+        step("Оплата СБП", Status.PASSED);
+        try {
+            StartPayment pay = new StartPayment();
+            pay.paySBP(driver);
+        }catch (Exception e) {throw new RuntimeException(e);}}
+
+    @Owner("Makeenkov Igor")
+    @Step("Оплата Yoomoney")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "Payment", description = "Оплата Yoomoney")
+    public void PaymentYoomoney(){
+        step("Оплата Yoomoney", Status.PASSED);
+        try {
+            StartPayment pay = new StartPayment();
+            pay.payYoomoney(driver);
+        }catch (Exception e) {throw new RuntimeException(e);}}
+
+    @Owner("Makeenkov Igor")
+    @Step("Оплата Криптовалюты")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "Payment", description = "Оплата Криптовалюты")
+    public void PaymentCrypto(){
+        step("Оплата Криптовалюты", Status.PASSED);
+        try {
+            StartPayment pay = new StartPayment();
+            pay.payCrypto(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
 
