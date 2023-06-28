@@ -47,10 +47,5 @@ public class StartPayment {
             PaymentYoomoney pay = new PaymentYoomoney();
             pay.paymentYoomoney(driver);
         } catch (Exception e) {throw new RuntimeException(e);}}
-    }
-
-
-
-
 
 }
