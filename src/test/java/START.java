@@ -1,3 +1,4 @@
+import FAQ.ConfigFileFAQ.StartFAQ;
 import Games.ConfigFileGames.StartGames;
 import Payment.ConfigFilePayment.StartPayment;
 import ProfileUser.ConfigFileProfile.StartProfileUser;
@@ -12,8 +13,6 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
-
 import static io.qameta.allure.Allure.step;
 
 public class START {
@@ -27,7 +26,7 @@ public class START {
     @Owner("Makeenkov Igor")
     @Description("Запускаются как отдельно, так и все вместе, зависимости между кейсами отсутсвуют")
     @Severity(SeverityLevel.CRITICAL)
-    @BeforeSuite(description = "Путь к драйверу + все опции и аргументы", inheritGroups = true, groups = {"StartThis", "Profile", "Miner", "Quit", "Payment"})
+    @BeforeSuite(description = "Путь к драйверу + все опции и аргументы", inheritGroups = true, groups = {"StartThis", "Profile", "Miner", "Quit", "Payment", "FAQ"})
     public void Start() {
         step("Кофниг, запуск", Status.PASSED);
 
@@ -229,14 +228,27 @@ public class START {
             pay.payCrypto(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
+    @Epic("ПОПУЛЯРНЫЕ ВОПРОСЫ (F.A.Q.)")
+    @Owner("Makeenkov Igor")
+    @Step("Общие вопросы")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "FAQ", description = "Общие вопросы")
+    public void genQuestions(){
+        step("Общие вопросы", Status.PASSED);
+        try {
+            StartFAQ FAQ = new StartFAQ();
+            FAQ.genQue(driver);
+        }catch (Exception e) {throw new RuntimeException(e);}}
+
 
     @Epic("ВЫХОД")
     @Step("Выход с теста")
     @Owner("Makeenkov Igor")
     @Severity(SeverityLevel.NORMAL)
     @Test(description = "Выход из теста", groups = "Quit")
-    public void QUITUp() throws IOException {
+    public void QUITUp(){
         step("Выход с теста", Status.PASSED);
+
         driver.quit();
     }
 
