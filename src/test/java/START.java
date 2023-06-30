@@ -233,11 +233,23 @@ public class START {
     @Step("Общие вопросы")
     @Severity(SeverityLevel.CRITICAL)
     @Test(alwaysRun = true, priority = 1, invocationCount = 1, groups = "FAQ", description = "Общие вопросы")
-    public void genQuestions(){
+    public void gensQuestions(){
         step("Общие вопросы", Status.PASSED);
         try {
             StartFAQ FAQ = new StartFAQ();
             FAQ.genQue(driver);
+        }catch (Exception e) {throw new RuntimeException(e);}}
+
+    @Epic("ПОПУЛЯРНЫЕ ВОПРОСЫ (F.A.Q.)")
+    @Owner("Makeenkov Igor")
+    @Step("Кошелек")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test(alwaysRun = true, priority = 2, invocationCount = 1, groups = "FAQ", description = "Кошелек")
+    public void gensWallet(){
+        step("Кошелек", Status.PASSED);
+        try {
+            StartFAQ FAQ = new StartFAQ();
+            FAQ.genwal(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
 
@@ -248,7 +260,6 @@ public class START {
     @Test(description = "Выход из теста", groups = "Quit")
     public void QUITUp(){
         step("Выход с теста", Status.PASSED);
-
         driver.quit();
     }
 
