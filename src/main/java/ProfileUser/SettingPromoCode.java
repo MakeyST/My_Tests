@@ -4,7 +4,6 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
 import io.qameta.allure.model.Status;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -13,10 +12,8 @@ import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
 import ru.yandex.qatools.allure.annotations.Description;
 
-import java.io.File;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static io.qameta.allure.Allure.step;
 @Link(name = "Test", type = "https://ppgetx.click/profile")
@@ -33,10 +30,6 @@ public class SettingPromoCode {
         SoftAssert t = new SoftAssert();
         driver.get(GetXProfileTest);
         Thread.sleep(1000);
-        Date dateNow = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("dd_MM_hh_mm_ss");
-        String fileName = format.format(dateNow) + ".png";
-        File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 
         //Клик по полю ввода промокода + ввод промокода
         step("Клик по полю ввода промокода + ввод промокода", Status.PASSED);
@@ -55,9 +48,11 @@ public class SettingPromoCode {
         step("Применить", Status.PASSED);
         driver.findElement(By.xpath(ApplyPromoCode)).click();
         Thread.sleep(400);
+        byte[] settingPromoCode = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
-        FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
+        //Аллюр Аттач
         Allure.attachment("Настройки, промокод", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.addAttachment("Скриншот: Промокод введен", new ByteArrayInputStream(settingPromoCode));
         t.assertAll();
     }
 }

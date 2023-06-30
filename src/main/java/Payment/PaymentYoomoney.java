@@ -3,15 +3,12 @@ package Payment;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Link;
 import io.qameta.allure.model.Status;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
 
-import java.io.File;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static io.qameta.allure.Allure.step;
 
@@ -176,12 +173,8 @@ public class PaymentYoomoney {
 
         //Скриншот
         step("Скриншот", Status.PASSED);
-        Thread.sleep(100);
-        Date dateNow = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("dd_MM_hh_mm_ss");
-        String fileName = format.format(dateNow) + ".png";
-        File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
+        Thread.sleep(400);
+        byte[] PaymentYoomoney = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
         //Проверка ожидания платежа
         step("Проверка ожидания платежа", Status.PASSED);
@@ -193,6 +186,7 @@ public class PaymentYoomoney {
 
         //Аллюр Аттач
         Allure.attachment("Yoomoney отчет", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.addAttachment("Скриншот: Страницы оплаты Yoomoney", new ByteArrayInputStream(PaymentYoomoney));
 
         //Сбор данных по проверкам
         step("Сбор данных по проверкам", Status.PASSED);

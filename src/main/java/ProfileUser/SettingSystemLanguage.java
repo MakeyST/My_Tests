@@ -4,7 +4,6 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
 import io.qameta.allure.model.Status;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -13,10 +12,8 @@ import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
 import ru.yandex.qatools.allure.annotations.Description;
 
-import java.io.File;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static io.qameta.allure.Allure.step;
 @Link(name = "Test", type = "https://ppgetx.click/profile")
@@ -33,12 +30,8 @@ public class SettingSystemLanguage {
     public void settingSystemLanguage (WebDriver driver) throws InterruptedException, IOException {
         driver.get(GetXProfileTest);
         SoftAssert t = new SoftAssert();
-        Date dateNow = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("dd_MM_hh_mm_ss");
-        String fileName = format.format(dateNow) + ".png";
-        File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         //До
-        FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
+        byte[] settingSystemLanguageAs = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
         //Настройка профиля: "Аккаунт", "Настройки", "Доступ", "История"
         step("Настройка профиля: Аккаунт, Настройки, Доступ, История", Status.PASSED);
@@ -64,7 +57,7 @@ public class SettingSystemLanguage {
         t.assertNotNull(TextSystemENG);
         System.out.println("*Проверка English системы [ENG], ---> выполнено*");
 
-        FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
+        byte[] settingSystemLanguageENG = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
 
         //Обратная проверка (возвращаем RUS)
@@ -88,9 +81,14 @@ public class SettingSystemLanguage {
         t.assertNotNull(TextSystemRUS);
         System.out.println("*Проверка Русский системы [RUS], ---> выполнено*");
 
-        FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
+        byte[] settingSystemLanguageRUS = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
+        //Аллюр Аттач
         Allure.attachment("Настройки, смена языка", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.addAttachment("Скриншот: До смены языка", new ByteArrayInputStream(settingSystemLanguageAs));
+        Allure.addAttachment("Скриншот: Англ язык актив", new ByteArrayInputStream(settingSystemLanguageENG));
+        Allure.addAttachment("Скриншот: Рус язык актив", new ByteArrayInputStream(settingSystemLanguageRUS));
+
         t.assertAll();
 
     }

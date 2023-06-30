@@ -5,7 +5,6 @@ import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Step;
 import io.qameta.allure.model.Status;
-import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.extension.TestWatcher;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
@@ -15,13 +14,12 @@ import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
 import ru.yandex.qatools.allure.annotations.Description;
 
-import java.io.File;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.util.Date;
 
 import static io.qameta.allure.Allure.step;
+
 @Link(name = "Test", type = "https://ppgetx.click/")
 @Link(name = "Prod", type = "https://get22.cfd/")
 @Owner("Makeenkov Igor")
@@ -35,20 +33,20 @@ public class Authorization implements TestWatcher {
     public void authorization(WebDriver driver) throws InterruptedException, IOException {
         System.out.println("-----Авторизация запущена-----");
         SoftAssert t = new SoftAssert();
-        Date dateNow = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("dd_MM_hh_mm_ss");
-        String fileName = format.format(dateNow) + ".png";
-        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
         //Клик "Войти"
         step("Открыть окно авторизации", Status.PASSED);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(By.id("btn-login")).click();
+        Thread.sleep(700);
+        byte[] loginPopup = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
         //Ввод логин
         step("Ввод логин", Status.PASSED);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(By.id("login-field-email")).sendKeys(LoginPro100igo228);
+        Thread.sleep(500);
+        byte[] screenshotLogin = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
         //Проверка логина
         step("Проверка логина", Status.PASSED);
@@ -62,6 +60,8 @@ public class Authorization implements TestWatcher {
         step("Ввод пароль", Status.PASSED);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(By.id("login-field-password")).sendKeys(PasswordALLUSERS);
+        Thread.sleep(500);
+        byte[] screenshotPassword = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
         //Проверка пароля
         step("Проверка пароля", Status.PASSED);
@@ -79,11 +79,16 @@ public class Authorization implements TestWatcher {
 
 
         System.out.println("Авторизация пройдена");
-        Allure.getLifecycle().addAttachment("Скриншот после прохождения теста", "image/png", "png",
-                ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
-        FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
-        Allure.attachment("Авторизация юзера через e-mail", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
         Thread.sleep(3000);
+        byte[] screenshotTo = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+
+        //Аллюр Аттач
+        Allure.attachment("Авторизация юзера через e-mail", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.addAttachment("Скриншот: Попап авторизации", new ByteArrayInputStream(loginPopup));
+        Allure.addAttachment("Скриншот: Ввод логина", new ByteArrayInputStream(screenshotLogin));
+        Allure.addAttachment("Скриншот: Ввод пароля", new ByteArrayInputStream(screenshotPassword));
+        Allure.addAttachment("Скриншот: вход", new ByteArrayInputStream(screenshotTo));
+
         t.assertAll();
     }
 }

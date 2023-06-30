@@ -5,16 +5,13 @@ import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Step;
 import io.qameta.allure.model.Status;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
 import ru.yandex.qatools.allure.annotations.Description;
 
-import java.io.File;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static io.qameta.allure.Allure.step;
 
@@ -32,12 +29,8 @@ public class SettingNickname {
     public void setNickname (WebDriver driver) throws InterruptedException, IOException {
         driver.get(GetXProfileTest);
         SoftAssert t = new SoftAssert();
-        Date dateNow = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("dd_MM_hh_mm_ss");
-        String fileName = format.format(dateNow) + ".png";
-        File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         //До
-        FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
+        byte[] setNicknameAs = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         
         //Настройка профиля: "Аккаунт", "Настройки", "Доступ", "История"
         step("Настройка профиля: Аккаунт, Настройки, Доступ, История", Status.PASSED);
@@ -68,7 +61,7 @@ public class SettingNickname {
         t.assertNotNull(TextNicknameENG);
         System.out.println("*Проверка Никнейма [ENG], ---> выполнено*");
         //После
-        FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
+        byte[] setNicknameAsTo = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
 
         //Ввод RUS никнейма
@@ -96,8 +89,11 @@ public class SettingNickname {
         System.out.println("*Проверка Никнейма [RUS], ---> выполнено*");
 
         //После
-        FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
+        byte[] setNicknameAsToTo = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         Allure.attachment("Настройки, никнейм", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.addAttachment("Скриншот: До смены никнейма", new ByteArrayInputStream(setNicknameAs));
+        Allure.addAttachment("Скриншот: Смена на английский никнейм", new ByteArrayInputStream(setNicknameAsTo));
+        Allure.addAttachment("Скриншот: Смена на русский никнейм", new ByteArrayInputStream(setNicknameAsToTo));
         t.assertAll();
     }
 }

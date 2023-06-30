@@ -3,7 +3,6 @@ package ProfileUser;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Link;
 import io.qameta.allure.model.Status;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -11,10 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
 
-import java.io.File;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static io.qameta.allure.Allure.step;
 @Link(name = "Test", type = "https://ppgetx.click/profile/setting")
@@ -27,10 +24,6 @@ public class SettingPassword {
     String NewPassword = "23makey23";
     String ConfirmPassword = "23makey23";
     public void setPassword (WebDriver driver) throws InterruptedException, IOException {
-
-        //Аллюр Аттач
-        Allure.attachment("Настройки, пароль", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
-
         //Перейти на сайт
         step("Перейти на сайт", Status.PASSED);
         driver.get(GetXProfileTest);
@@ -38,13 +31,6 @@ public class SettingPassword {
 
         //Проверки
         SoftAssert t = new SoftAssert();
-
-        //Скриншот
-        Thread.sleep(100);
-        Date dateNow = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("dd_MM_hh_mm_ss");
-        String fileName = format.format(dateNow) + ".png";
-        File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 
         //Старый пароль
         step("Старый пароль", Status.PASSED);
@@ -91,7 +77,12 @@ public class SettingPassword {
         t.assertNotNull(TextConfirmPassword);
         System.out.println("*Проверка поля Подтверждения нового пароля, ---> выполнено*");
         Thread.sleep(500);
-        FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
+        byte[] setPassword = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+
+        //Аллюр Аттач
+        Allure.attachment("Настройки, пароль", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.addAttachment("Скриншот: Пароль успешно изменен", new ByteArrayInputStream(setPassword));
+
 
         //Выход
         t.assertAll();

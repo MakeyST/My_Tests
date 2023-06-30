@@ -4,16 +4,13 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
 import io.qameta.allure.model.Status;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
 import ru.yandex.qatools.allure.annotations.Description;
 
-import java.io.File;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static io.qameta.allure.Allure.step;
 @Link(name = "Test", type = "https://ppgetx.click/")
@@ -32,13 +29,9 @@ public class GameMiner {
         driver.get(GetXMINER);
         Thread.sleep(1500);
         SoftAssert t = new SoftAssert();
-        Date dateNow = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("dd_hh_mm_ss");
-        String fileName = format.format(dateNow) + ".png";
-        File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 
         //До
-        FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
+        byte[] screenshotAs = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
         //Выставляем колличество бомб (кнопки) + проверяем, что выбралось нужное
         step("Выставляем колличество бомб (кнопки) + проверяем, что выбралось нужное", Status.PASSED);
@@ -105,8 +98,8 @@ public class GameMiner {
         Thread.sleep(600);
 
         //После
-        step("После скриншот", Status.PASSED);
-        FileUtils.copyFile(screenshot, new File("C:\\WorkScreen\\" + fileName));
+        step("После, скриншот", Status.PASSED);
+        byte[] screenshotAsTo = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
 
         //Забрать приз. Если выйграл, то забрал, если нет, то завершаем тест.
@@ -126,7 +119,11 @@ public class GameMiner {
             currentDiv.click();
         }
 
+        //Аллюр Аттач
         Allure.attachment("Минер отчет", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.addAttachment("Скриншот: До начала игры", new ByteArrayInputStream(screenshotAs));
+        Allure.addAttachment("Скриншот: Сыграли, но приз не забрали", new ByteArrayInputStream(screenshotAsTo));
+
         t.assertAll();
     }
 }
