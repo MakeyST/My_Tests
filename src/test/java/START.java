@@ -76,6 +76,7 @@ public class START {
             spu.nicknameEngRus(driver);
         } catch (Exception e) {throw new RuntimeException(e);}}
 
+    @Epic("ПРОФИЛЬ ЮЗЕРА")
     @Step("Смена языка системы")
     @Owner("Makeenkov Igor")
     @Description("Кейс смены языка системы англ + рус")
@@ -88,6 +89,7 @@ public class START {
             spu.systemLanguage(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
+    @Epic("ПРОФИЛЬ ЮЗЕРА")
     @Step("Использование промокода")
     @Owner("Makeenkov Igor")
     @Description("Кейс использования промокода")
@@ -100,6 +102,7 @@ public class START {
             spu.settingsPromoCode(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
+    @Epic("ПРОФИЛЬ ЮЗЕРА")
     @Step("Проверка введенного промокода")
     @Owner("Makeenkov Igor")
     @Description("Пока не готово, в планах, будет делать скрины, что промокод активирован")
@@ -112,6 +115,7 @@ public class START {
             spu.controlPromocode(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
+    @Epic("ПРОФИЛЬ ЮЗЕРА")
     @Step("Смена пароля")
     @Owner("Makeenkov Igor")
     @Description("Кейс смена пароля")
@@ -124,6 +128,7 @@ public class START {
             spu.settingsPassword(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
+    @Epic("ПРОФИЛЬ ЮЗЕРА")
     @Step("Возврат прошлого пароля")
     @Owner("Makeenkov Igor")
     @Description("Кейс возврата прошлого пароля, сделан для того, чтобы не было зависимости")
@@ -151,7 +156,7 @@ public class START {
         }catch (Exception e) {throw new RuntimeException(e);}}
 
 
-    @Feature("БЫСТРЫЕ ИГРЫ")
+    @Epic("БЫСТРЫЕ ИГРЫ")
     @Owner("Makeenkov Igor")
     @Step("Быстрая игра Минер")
     @Description("Чтобы не проходить полный кейс игры минер, этот кейс быстрые игры проводит, без проверки условий")
@@ -164,7 +169,7 @@ public class START {
             GamesFast.quickMiner(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
-    @Feature("СПОСОБЫ ОПЛАТЫ")
+    @Epic("СПОСОБЫ ОПЛАТЫ")
     @Owner("Makeenkov Igor")
     @Step("Оплата Сбербанк")
     @Severity(SeverityLevel.CRITICAL)
@@ -176,6 +181,7 @@ public class START {
             pay.paySber(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
+    @Epic("СПОСОБЫ ОПЛАТЫ")
     @Owner("Makeenkov Igor")
     @Step("Оплата QIWI")
     @Severity(SeverityLevel.CRITICAL)
@@ -187,6 +193,7 @@ public class START {
             pay.payQIWI(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
+    @Epic("СПОСОБЫ ОПЛАТЫ")
     @Owner("Makeenkov Igor")
     @Step("Оплата СБП")
     @Severity(SeverityLevel.CRITICAL)
@@ -198,6 +205,7 @@ public class START {
             pay.paySBP(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
+    @Epic("СПОСОБЫ ОПЛАТЫ")
     @Owner("Makeenkov Igor")
     @Step("Оплата Yoomoney")
     @Severity(SeverityLevel.CRITICAL)
@@ -209,6 +217,7 @@ public class START {
             pay.payYoomoney(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
+    @Epic("СПОСОБЫ ОПЛАТЫ")
     @Owner("Makeenkov Igor")
     @Step("Оплата Криптовалюты")
     @Severity(SeverityLevel.CRITICAL)
@@ -221,7 +230,7 @@ public class START {
         }catch (Exception e) {throw new RuntimeException(e);}}
 
 
-    @Feature("ВЫХОД")
+    @Epic("ВЫХОД")
     @Step("Выход с теста")
     @Owner("Makeenkov Igor")
     @Severity(SeverityLevel.NORMAL)
