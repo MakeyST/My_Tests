@@ -3,6 +3,7 @@
 
 <suite name = "All groups">
 
+
     <!--Старт-->
     <test name="StartThis">
         <groups>
@@ -12,42 +13,6 @@
         </groups>
         <classes>
             <class name="START" />
-        </classes>
-    </test>
-
-    <!--Профиль-->
-    <test name = "Profile">
-        <groups>
-            <run>
-                <include name="Profile"/>
-            </run>
-        </groups>
-        <classes>
-            <class name="START"/>
-        </classes>
-    </test>
-
-    <!--Минер-->
-    <test name = "Miner">
-        <groups>
-            <run>
-                <include name="Miner"/>
-            </run>
-        </groups>
-        <classes>
-            <class name="START"/>
-        </classes>
-    </test>
-
-    <!--Способы оплаты-->
-    <test name = "Payment">
-        <groups>
-            <run>
-                <include name="Payment"/>
-            </run>
-        </groups>
-        <classes>
-            <class name="START"/>
         </classes>
     </test>
 
@@ -63,7 +28,6 @@
         </classes>
     </test>
 
-    <!--Выход-->
     <test name = "Quit">
         <groups>
             <run>
@@ -74,4 +38,5 @@
             <class name="START"/>
         </classes>
     </test>
+
 </suite>
