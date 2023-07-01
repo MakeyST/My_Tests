@@ -15,16 +15,15 @@ import ru.yandex.qatools.allure.annotations.Description;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
+import static ProfileUser.ConfigFileProfile.LocatorsProfleUser.GetXProfileTest;
+import static ProfileUser.ConfigFileProfile.LocatorsProfleUser.promo;
 import static io.qameta.allure.Allure.step;
 @Link(name = "Test", type = "https://ppgetx.click/profile")
 @Link(name = "Prod", type = "https://get22.cfd/profile")
 @Owner("Makeenkov Igor")
 @Description("Промокоды в профиле юзера")
 public class SettingPromoCode {
-    String GetXProfileTest = "https://ppgetx.click/profile";
-    String GetXProfilePROD = "https://get22.cfd/profile";
     String InputPromoCode = "//input[@class=\"field field-group__field\"]";
-    String promo = "482IE334JPWGI1GRFSO1";
     String ApplyPromoCode = "//button[@class=\"btn field-group__btn\"]";
     public void settingPromoCode(WebDriver driver) throws InterruptedException, IOException {
         SoftAssert t = new SoftAssert();
@@ -39,7 +38,7 @@ public class SettingPromoCode {
         //Проверка введенного промокода
         step("Проверка введенного промокода", Status.PASSED);
         String TextPromoCode =  driver.findElement(By.xpath(InputPromoCode)).getAttribute("value");
-        String ExpectedPromoCode = "482IE334JPWGI1GRFSO1";
+        String ExpectedPromoCode = promo;
         t.assertEquals(TextPromoCode, ExpectedPromoCode, "Проверка поля Промокод, ПРОВАЛЕНА!");
         t.assertNotNull(TextPromoCode);
         System.out.println("*Проверка поля Промокод, ---> выполнено*");

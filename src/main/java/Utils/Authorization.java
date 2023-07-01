@@ -18,6 +18,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.time.Duration;
 
+import static Utils.LocatorsAuthorization.LoginPro100igo228;
+import static Utils.LocatorsAuthorization.PasswordALLUSERS;
 import static io.qameta.allure.Allure.step;
 
 @Link(name = "Test", type = "https://ppgetx.click/")
@@ -25,10 +27,7 @@ import static io.qameta.allure.Allure.step;
 @Owner("Makeenkov Igor")
 @Description("Авторизация. Доступно несколько учетных записей, их нужно менять по необходимости")
 public class Authorization implements TestWatcher {
-    String LoginPro100igo228 = "pro100igo228@gmail.com";
-    String LoginGetxMakeyStar = "getxmakeystar@gmail.com";
-    //Пароль от всех учеток мною созданых
-    String PasswordALLUSERS = "23Makey23";
+
     @Step("Авторизация")
     public void authorization(WebDriver driver) throws InterruptedException, IOException {
         System.out.println("-----Авторизация запущена-----");

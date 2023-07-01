@@ -14,10 +14,10 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
+import static FAQ.ConfigFileFAQ.LocatorsFAQ.GetXFAQ;
 import static io.qameta.allure.Allure.step;
 
 public class General_Questions {
-    String GetXFAQ = "https://ppgetx.click/faq";
     String CheckQuestions = "//button[@class=\"spoiler-block__title\"]";
     public void general_Questions (WebDriver driver) throws InterruptedException, IOException {
 

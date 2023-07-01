@@ -10,18 +10,17 @@ import org.testng.asserts.SoftAssert;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
+import static Payment.ConfigFilePayment.LocatorsPayment.WalletNumber;
+import static ProfileUser.ConfigFileProfile.LocatorsProfleUser.GetXProfileTest;
 import static io.qameta.allure.Allure.step;
 
 @Link(name = "Test", type = "https://ppgetx.click/")
 @Link(name = "Prod", type = "https://get22.cfd/")
 public class PaymentCrypto {
-    String GetXProfileTest = "https://ppgetx.click/";
-    String GetXProfilePROD = "https://get22.cfd/";
     String Wallet = "//button[@class=\"btn btn_shadow headline__balance-btn\"]";
     String PaymentMethods = "//button[@class=\"pay__option js-wives-hover js-ven-wives\"]";
     String Currency = "//div[@class=\"crypto-item\"]";
     String CryptoWallet = "//div[@class=\"crypto-wallet__text\"]";
-    String WalletNumber = "bc1q2q3gr327cv7g4tfknmdrrn8f95c40tzl0kxh4k";
     String ConvertBTC = "//input[@class=\"crypto-course__value\"]";
     String ConvertRUB = "//input[@class=\"crypto-course__value\"]";
     public void paymentCrypto (WebDriver driver) throws InterruptedException, IOException {

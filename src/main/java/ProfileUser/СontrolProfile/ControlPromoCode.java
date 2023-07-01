@@ -13,10 +13,11 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.time.Duration;
 
+import static ProfileUser.ConfigFileProfile.LocatorsProfleUser.GetXProfileHistory;
+
 @Owner("Makeenkov Igor")
 @Description("Проверка, что промокод успешно активирован")
 public class ControlPromoCode {
-    String GetXProfileHistory = "https://ppgetx.click/profile/history";
     String Bonuses = "//button[@class=\"button-group__link\"]";
 
     public void controlPromoCode (WebDriver driver) throws InterruptedException, IOException {

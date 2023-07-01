@@ -13,6 +13,7 @@ import ru.yandex.qatools.allure.annotations.Description;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
+import static ProfileUser.ConfigFileProfile.LocatorsProfleUser.GetXProfileTest;
 import static io.qameta.allure.Allure.step;
 
 @Owner("Makeenkov Igor")
@@ -20,8 +21,6 @@ import static io.qameta.allure.Allure.step;
 @Link(name = "Test", type = "https://ppgetx.click/profile")
 @Link(name = "Prod", type = "https://get22.cfd/profile")
 public class SettingNickname {
-    String GetXProfileTest = "https://ppgetx.click/profile";
-    String GetXProfilePROD = "https://get22.cfd/profile";
     String Setting = "//a[@class=\"rc-tabs__link js-open-tab\"]";
     String Nickname = "//input[@class=\"field field-group__field\"]";
     String Change = "//button[@class=\"btn field-group__btn\"]";

@@ -14,10 +14,10 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
+import static FAQ.ConfigFileFAQ.LocatorsFAQ.GetXFAQ;
 import static io.qameta.allure.Allure.step;
 
 public class Wallet {
-    String GetXFAQ = "https://ppgetx.click/faq";
     String CheckQuestions = "//button[@class=\"spoiler-block__title\"]";
     public void genWallet(WebDriver driver) throws InterruptedException, IOException {
         driver.get(GetXFAQ);

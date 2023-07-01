@@ -13,16 +13,13 @@ import org.testng.asserts.SoftAssert;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
+import static ProfileUser.ConfigFileProfile.LocatorsProfleUser.*;
 import static io.qameta.allure.Allure.step;
 @Link(name = "Test", type = "https://ppgetx.click/profile/setting")
 @Link(name = "Prod", type = "https://get22.cfd/profile/setting")
 public class SettingPasswordBack {
-    String GetXProfileTest = "https://ppgetx.click/profile/setting";
-    String GetXProfilePROD = "https://get22.cfd/profile/setting";
     String InputOldPassword = "//input[@class=\"field field-group__field field_icon\"]";
-    String OldPassword = "23makey23";
-    String NewPassword = "23Makey23";
-    String ConfirmPassword = "23Makey23";
+
     public void setPasswordBack (WebDriver driver) throws InterruptedException, IOException {
         //Перейти на сайт
         step("Перейти на сайт", Status.PASSED);

@@ -12,13 +12,13 @@ import ru.yandex.qatools.allure.annotations.Description;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
+import static Games.ConfigFileGames.LocatorsGames.GetXMINER;
 import static io.qameta.allure.Allure.step;
 @Link(name = "Test", type = "https://ppgetx.click/")
 @Link(name = "Prod", type = "https://get22.cfd/")
 @Owner("Makeenkov Igor")
 @Description("Игра Минер")
 public class GameMiner {
-    String GetXMINER = "https://ppgetx.click/games/miner";
     String PlayMiner = "//button[@class=\"btn btn_full btn_long btn_can-cancel\"]";
     String WinMinerPlay = "//button[@class=\"btn btn_full btn_long btn_can-cancel btn-pick-up\"]";
     String NumberofBombs = "//button[@class=\"bit-feed__btn\"]";

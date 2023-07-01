@@ -13,10 +13,10 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static Games.ConfigFileGames.LocatorsGames.GETXCOIN;
 import static io.qameta.allure.Allure.step;
 
 public class GameCoin {
-    String GETXCOIN = "https://ppgetx.click/games/coinflip";
     String BID = "//input[@id=\"BidMobile\"]";
     String Control_BID_button = "//button[@class=\"coinflip-control__bid-field__control__btn\"]";
     String EAGLE = "//div[@class=\"bit-feed__cell bit-feed__eagle\"]";
