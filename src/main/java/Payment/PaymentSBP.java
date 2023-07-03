@@ -184,7 +184,7 @@ public class PaymentSBP {
         System.out.println("*Проверка попапа оплаты сбера, ---> выполнено*");
 
         //Аллюр Аттач
-        Allure.attachment("СБП отчет", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.attachment("Логи", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
         Allure.addAttachment("Скриншот: Страницы оплаты СБП", new ByteArrayInputStream(PaymentSBP));
 
         //Сбор данных по проверкам

@@ -185,7 +185,7 @@ public class PaymentQIWI {
         System.out.println("*Проверка попапа оплаты сбера, ---> выполнено*");
 
         //Аллюр Аттач
-        Allure.attachment("QIWI отчет", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.attachment("Логи", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
         Allure.addAttachment("Скриншот: Страницы оплаты киви", new ByteArrayInputStream(PaymentQIWI));
 
         //Сбор данных по проверкам

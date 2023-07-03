@@ -120,7 +120,7 @@ public class GameMiner {
         }
 
         //Аллюр Аттач
-        Allure.attachment("Минер отчет", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.attachment("Логи", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
         Allure.addAttachment("Скриншот: До начала игры", new ByteArrayInputStream(screenshotAs));
         Allure.addAttachment("Скриншот: Сыграли, но приз не забрали", new ByteArrayInputStream(screenshotAsTo));
 

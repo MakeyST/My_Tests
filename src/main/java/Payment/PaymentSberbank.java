@@ -183,7 +183,7 @@ public class PaymentSberbank {
         System.out.println("*Проверка попапа оплаты сбера, ---> выполнено*");
 
         //Аллюр Аттач
-        Allure.attachment("Сбербанк отчет", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.attachment("Логи", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
         Allure.addAttachment("Скриншот: Страницы оплаты Сбербанк", new ByteArrayInputStream(PaymentSber));
 
         //Сбор данных по проверкам

@@ -82,7 +82,7 @@ public class Authorization implements TestWatcher {
         byte[] screenshotTo = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
         //Аллюр Аттач
-        Allure.attachment("Авторизация юзера через e-mail", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.attachment("Логи", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
         Allure.addAttachment("Скриншот: Попап авторизации", new ByteArrayInputStream(loginPopup));
         Allure.addAttachment("Скриншот: Ввод логина", new ByteArrayInputStream(screenshotLogin));
         Allure.addAttachment("Скриншот: Ввод пароля", new ByteArrayInputStream(screenshotPassword));

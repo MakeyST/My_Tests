@@ -91,7 +91,7 @@ public class PaymentCrypto {
         byte[] PaymentCrypto = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
         //Аллюр Аттач
-        Allure.attachment("Криптовалюта BTC отчет", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.attachment("Логи", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
         Allure.addAttachment("Скриншот: Страницы оплаты крипта", new ByteArrayInputStream(PaymentCrypto));
 
         //Сбор данных по проверкам

@@ -83,7 +83,7 @@ public class SettingSystemLanguage {
         byte[] settingSystemLanguageRUS = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
         //Аллюр Аттач
-        Allure.attachment("Настройки, смена языка", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.attachment("Логи", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
         Allure.addAttachment("Скриншот: До смены языка", new ByteArrayInputStream(settingSystemLanguageAs));
         Allure.addAttachment("Скриншот: Англ язык актив", new ByteArrayInputStream(settingSystemLanguageENG));
         Allure.addAttachment("Скриншот: Рус язык актив", new ByteArrayInputStream(settingSystemLanguageRUS));

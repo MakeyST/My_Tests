@@ -7,11 +7,20 @@ import Utils.ConfigFileUtils.StartUtils;
 import Utils.RegressDriver;
 import io.qameta.allure.*;
 import io.qameta.allure.model.Status;
+import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
+import org.openqa.selenium.remote.CapabilityType;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import java.util.Date;
+import java.util.logging.Level;
 
 import static io.qameta.allure.Allure.step;
 
@@ -19,6 +28,9 @@ import static io.qameta.allure.Allure.step;
 
 public class START {
     public static WebDriver driver;
+    private MutableCapabilities options;
+    private MutableCapabilities caps;
+
     //Система
     @Link(name = "Test", type = "https://ppgetx.click/")
     @Link(name = "Prod", type = "https://get22.cfd/")
@@ -28,13 +40,23 @@ public class START {
     @Severity(SeverityLevel.CRITICAL)
     @BeforeSuite(description = "Путь к драйверу + все опции и аргументы", inheritGroups = true, groups = {"StartThis", "Profile", "Miner", "Quit", "Payment", "FAQ"})
     public void Start() {
-        step("Кофниг, запуск", Status.PASSED);
-
         step("Путь к драйверу", Status.PASSED);
         System.setProperty(
+
                 "webdriver.chrome.driver",
                 "C:\\chromedriver113.0.5672.127.exe"
         );
+
+        //Логирование
+        LogEntries logEntries = START.driver.manage().logs().get(LogType.BROWSER);
+        for (LogEntry entry : logEntries) {
+            System.out.println(new Date(entry.getTimestamp()) + " " + entry.getLevel() + " " + entry.getMessage());}
+        LoggingPreferences logPrefs = new LoggingPreferences();
+        logPrefs.enable(LogType.BROWSER, Level.ALL);
+        options.setCapability("goog:loggingPrefs", logPrefs);
+        caps.setCapability(CapabilityType.PROXY, logPrefs);
+        step("Кофниг, запуск", Status.PASSED);
+
 
         step("Настройки бразуера", Status.PASSED);
         ChromeOptions browserOptions = new ChromeOptions();

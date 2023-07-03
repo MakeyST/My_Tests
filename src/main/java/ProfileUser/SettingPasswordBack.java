@@ -77,7 +77,7 @@ public class SettingPasswordBack {
         byte[] setPasswordBack = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
         //Аллюр Аттач
-        Allure.attachment("Настройки, пароль вернуть назад", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.attachment("Логи", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
         Allure.addAttachment("Скриншот: Пароль успешно изменен(вернули старый)", new ByteArrayInputStream(setPasswordBack));
 
         //Выход
