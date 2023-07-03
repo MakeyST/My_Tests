@@ -148,7 +148,7 @@ public class Wallet {
         driver.findElements(By.xpath(CheckQuestions)).get(9).click();
 
         //Аллюр Аттач
-        Allure.attachment("Общие вопросы FAQ", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        Allure.attachment("Логи", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
         Allure.addAttachment("Скриншот: ДО", new ByteArrayInputStream(screenshotAs));
         Allure.addAttachment("Скриншот: Как пополнить баланс?", new ByteArrayInputStream(screenshot1));
         Allure.addAttachment("Скриншот: Как вывести средства?", new ByteArrayInputStream(screenshot2));

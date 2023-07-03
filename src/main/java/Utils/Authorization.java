@@ -37,14 +37,14 @@ public class Authorization implements TestWatcher {
         step("Открыть окно авторизации", Status.PASSED);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(By.id("btn-login")).click();
-        Thread.sleep(700);
+        Thread.sleep(500);
         byte[] loginPopup = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
         //Ввод логин
         step("Ввод логин", Status.PASSED);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(By.id("login-field-email")).sendKeys(LoginPro100igo228);
-        Thread.sleep(500);
+        Thread.sleep(200);
         byte[] screenshotLogin = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
         //Проверка логина
@@ -59,7 +59,7 @@ public class Authorization implements TestWatcher {
         step("Ввод пароль", Status.PASSED);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(By.id("login-field-password")).sendKeys(PasswordALLUSERS);
-        Thread.sleep(500);
+        Thread.sleep(200);
         byte[] screenshotPassword = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
         //Проверка пароля
@@ -74,11 +74,11 @@ public class Authorization implements TestWatcher {
         step("Клик Войти в учётку", Status.PASSED);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(By.id("login-form-login")).click();
-        Thread.sleep(500);
+        Thread.sleep(200);
 
 
         System.out.println("Авторизация пройдена");
-        Thread.sleep(3000);
+        Thread.sleep(1500);
         byte[] screenshotTo = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
         //Аллюр Аттач
