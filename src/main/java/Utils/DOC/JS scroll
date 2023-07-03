@@ -1,0 +1,8 @@
+JavascriptExecutor js = ((JavascriptExecutor) driver);
+//Прокрутка вниз: js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+//Прокрутка вверх: js.executeScript("window.scrollTo(0, -document.body.scrollHeight);");
+
+//Скролл
+        js.executeScript("window.scrollBy(0,-250)");
+        - вверх
+        без - вниз

@@ -41,7 +41,7 @@ public class PaymentCrypto {
 
         //Выбор метода оплаты Криптовалюта
         step("Выбор метода оплаты Криптовалюта", Status.PASSED);
-        driver.findElements(By.xpath(PaymentMethods)).get(1).click();
+        driver.findElements(By.xpath(PaymentMethods)).get(4).click();
         Thread.sleep(300);
 
         //Выбор BTC

@@ -107,8 +107,13 @@ public class GameMiner {
         driver.findElements(By.xpath(WinMinerPlay)).get(0).click();
         Thread.sleep(400);
 
+        JavascriptExecutor js = ((JavascriptExecutor) driver);
+
         WebElement currentDiv = null;
-        WebElement[] divs = driver.findElement(By.className("bit-feed__cell_bit")).findElements(By.className("btn_full")).toArray(new WebElement[0]);
+        WebElement[] divs = driver.findElement(By.className("bit-feed__cell_bit"))
+                .findElements(By.className("btn_full"))
+                .toArray(new WebElement[0]);
+
         for (WebElement div : divs) {
             if (!div.getCssValue("display").equals("none")) {
                 currentDiv = div;
