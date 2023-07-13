@@ -1,6 +1,6 @@
 package Games.ConfigFileGames;
 
 public class LocatorsGames {
-    public static String GetXMINER = "https://ppgetx.click/games/miner";
-    public static String GETXCOIN = "https://ppgetx.click/games/coinflip";
+    public static String GetXMINER = "https://askltv.site/games/miner";
+    public static String GETXCOIN = "https://askltv.site/games/coinflip";
 }

@@ -13,44 +13,59 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <extentreports-version>5.0.8</extentreports-version>
+        <rest-assured-version>5.3.1</rest-assured-version>
+        <json-schema-validator-version>2.2.14</json-schema-validator-version>
+        <allure-version>2.22.0</allure-version>
+        <junit-jupiter-version>5.10.0-M1</junit-jupiter-version>
+        <junit-version>4.13.2</junit-version>
+        <selenium-version>4.9.1</selenium-version>
+        <spring-boot-version>3.1.0</spring-boot-version>
+        <log4j-version>2.20.0</log4j-version>
+        <testng-version>7.8.0</testng-version>
+        <poi-version>5.0.0</poi-version>
+        <maven-core-version>3.9.2</maven-core-version>
+        <maven-artifact-version>3.9.2</maven-artifact-version>
+        <maven-plugin-api-version>3.9.2</maven-plugin-api-version>
+        <maven-plugin-annotations-version>3.9.0</maven-plugin-annotations-version>
     </properties>
 
     <!-- Все dependency беру тут: https://mvnrepository.com/ -->
     <dependencies>
+        <!-- RestAssured -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>scala-support</artifactId>
-            <version>5.3.1</version>
+            <version>${rest-assured-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>spring-web-test-client</artifactId>
-            <version>5.3.1</version>
+            <version>${rest-assured-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>spring-mock-mvc</artifactId>
-            <version>5.3.1</version>
+            <version>${rest-assured-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>json-schema-validator</artifactId>
-            <version>5.3.1</version>
+            <version>${rest-assured-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>xml-path</artifactId>
-            <version>5.3.1</version>
+            <version>${rest-assured-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>json-path</artifactId>
-            <version>5.3.1</version>
+            <version>${rest-assured-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -61,7 +76,7 @@
         <dependency>
             <groupId>com.github.java-json-tools</groupId>
             <artifactId>json-schema-validator</artifactId>
-            <version>2.2.14</version>
+            <version>${json-schema-validator-version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.fge</groupId>
@@ -71,35 +86,37 @@
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured-common</artifactId>
-            <version>5.3.1</version>
+            <version>${rest-assured-version}</version>
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured-all</artifactId>
-            <version>5.3.1</version>
+            <version>${rest-assured-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>json-path</artifactId>
-            <version>5.3.1</version>
+            <version>${rest-assured-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>json-schema-validator</artifactId>
-            <version>5.3.1</version>
+            <version>${rest-assured-version}</version>
         </dependency>
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>5.3.1</version>
+            <version>${rest-assured-version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Allure -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-rest-assured</artifactId>
-            <version>2.22.0</version>
+            <version>${allure-version}</version>
         </dependency>
         <dependency>
             <groupId>ru.yandex.qatools.ashot</groupId>
@@ -109,149 +126,139 @@
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.9.19</version>
+            <version>${aspectj.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
-            <version>2.22.0</version>
+            <version>${allure-version}</version>
         </dependency>
+
+        <!-- JUnit -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.9.3</version>
+            <version>${junit-jupiter-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13.2</version>
+            <version>${junit-version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.9.3</version>
+            <version>${junit-jupiter-version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Extent Reports -->
         <dependency>
             <groupId>com.aventstack</groupId>
             <artifactId>extentreports</artifactId>
             <version>${extentreports-version}</version>
         </dependency>
+
+        <!-- Selenium -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.9.1</version>
+            <version>${selenium-version}</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-remote-driver</artifactId>
-            <version>4.9.1</version>
+            <version>${selenium-version}</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
-            <version>4.9.1</version>
+            <version>${selenium-version}</version>
         </dependency>
+
+        <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot</artifactId>
-            <version>3.1.0</version>
+            <version>${spring-boot-version}</version>
         </dependency>
+
+        <!-- WebDriverManager -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>5.3.3</version>
         </dependency>
+
+        <!-- Log4j -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>2.20.0</version>
+            <version>${log4j-version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>2.20.0</version>
+            <version>${log4j-version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j2-impl</artifactId>
-            <version>2.20.0</version>
+            <version>${log4j-version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- TestNG -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.6.1</version>
+            <version>${testng-version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Apache POI -->
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.6.1</version>
-            <scope>compile</scope>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${poi-version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.6.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.6.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.8.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.8.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-testng</artifactId>
-            <version>2.22.0</version>
-        </dependency>
-        <dependency>
-            <groupId>ru.yandex.qatools.allure</groupId>
-            <artifactId>allure-java-annotations</artifactId>
-            <version>1.5.4</version>
-        </dependency>
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-attachments</artifactId>
-            <version>2.22.0</version>
-        </dependency>
+
+        <!-- Maven -->
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-core</artifactId>
-            <version>3.9.2</version>
+            <version>${maven-core-version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-artifact</artifactId>
-            <version>3.9.2</version>
+            <version>${maven-artifact-version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-            <version>3.9.2</version>
+            <version>${maven-plugin-api-version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
             <artifactId>maven-plugin-annotations</artifactId>
-            <version>3.9.0</version>
+            <version>${maven-plugin-annotations-version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.8.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -266,6 +273,7 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -281,5 +289,5 @@
         </plugins>
     </build>
 
-
 </project>
+

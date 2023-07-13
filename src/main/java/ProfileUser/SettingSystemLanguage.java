@@ -1,6 +1,7 @@
 package ProfileUser;
 
 import io.qameta.allure.Allure;
+import io.qameta.allure.Description;
 import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
 import io.qameta.allure.model.Status;
@@ -10,7 +11,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
-import ru.yandex.qatools.allure.annotations.Description;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -20,12 +20,12 @@ import static io.qameta.allure.Allure.step;
 @Link(name = "Test", type = "https://ppgetx.click/profile")
 @Link(name = "Prod", type = "https://get22.cfd/profile")
 @Owner("Makeenkov Igor")
-@Description("Смена языка")
 public class SettingSystemLanguage {
     String Setting = "//a[@class=\"rc-tabs__link js-open-tab\"]";
     String SystemLanguage = "//button[@class=\"select-box__main\"]";
     String SelectboxLanguage = "//a[@class=\"select-box__item\"]";
     String LookLanguage = "//button[@class=\"select-box__main\"]";
+    @Description("Смена языка")
     public void settingSystemLanguage (WebDriver driver) throws InterruptedException, IOException {
         driver.get(GetXProfileTest);
         SoftAssert t = new SoftAssert();

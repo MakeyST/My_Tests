@@ -1,13 +1,13 @@
 package Games;
 
 import io.qameta.allure.Allure;
+import io.qameta.allure.Description;
 import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
 import io.qameta.allure.model.Status;
 import org.openqa.selenium.*;
 import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
-import ru.yandex.qatools.allure.annotations.Description;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -17,7 +17,6 @@ import static io.qameta.allure.Allure.step;
 @Link(name = "Test", type = "https://ppgetx.click/")
 @Link(name = "Prod", type = "https://get22.cfd/")
 @Owner("Makeenkov Igor")
-@Description("Игра Минер")
 public class GameMiner {
     String PlayMiner = "//button[@class=\"btn btn_full btn_long btn_can-cancel\"]";
     String WinMinerPlay = "//button[@class=\"btn btn_full btn_long btn_can-cancel btn-pick-up\"]";
@@ -25,6 +24,7 @@ public class GameMiner {
     String BOmbsNamberFrom5Before24 = "//button[@class=\"bit-feed__btn active\"]";
     String OpenaCell = "//div[@class=\"miner_cell_container opened-cell\"]";
     String AnotherInput = "//input[@class=\"number-field__value number-field__value_bid\"]";
+    @Description("Игра Минер")
     public void gameminer (WebDriver driver) throws InterruptedException, IOException {
         driver.get(GetXMINER);
         Thread.sleep(1500);

@@ -1,19 +1,16 @@
 package Utils;
 
-import io.qameta.allure.Link;
+import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import org.openqa.selenium.chrome.ChromeDriver;
-import ru.yandex.qatools.allure.annotations.Description;
 
 import static Utils.LocatorsDriver.Test;
 
 @Owner("Makeenkov Igor")
-@Description("Использования драйвера для запуска страницы")
-@Link(name = "Test", type = "https://ppgetx.click/")
-@Link(name = "Prod", type = "https://get22.cfd/")
 public class RegressDriver {
 
     private static ChromeDriver _regressDriver;
+    @Description("Использования драйвера для запуска страницы")
     public static ChromeDriver getDriver() {
         if (RegressDriver._regressDriver == null) {
             RegressDriver._regressDriver = new ChromeDriver();

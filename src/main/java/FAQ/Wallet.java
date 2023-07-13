@@ -1,8 +1,12 @@
 package FAQ;
 
+import Utils.ScreenshotHelper;
 import io.qameta.allure.Allure;
 import io.qameta.allure.model.Status;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
 
@@ -10,144 +14,170 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import static FAQ.ConfigFileFAQ.LocatorsFAQ.GetXFAQ;
+import static Utils.ScreenshotHelper.compareScreenshots;
+import static Utils.ScreenshotHelper.takeFullPageScreenshot;
+import static Utils.WaitForPageToLoad.waitForPageToLoad;
 import static io.qameta.allure.Allure.step;
 
 public class Wallet {
-    String CheckQuestions = "//button[@class=\"spoiler-block__title\"]";
-    String ButtonWallet = "//button[@class=\"nav-tabs__btn\"]";
-    public void genWallet(WebDriver driver) throws InterruptedException, IOException {
+    private static final String CHECK_QUESTIONS_XPATH = "//button[@class=\"spoiler-block__title\"]";
+    private static final String BUTTON_WALLET_XPATH = "//button[@class=\"nav-tabs__btn\"]";
+
+    public void genWallet(WebDriver driver) throws IOException, InterruptedException {
         driver.get(GetXFAQ);
-        JavascriptExecutor js = ((JavascriptExecutor) driver);
         SoftAssert t = new SoftAssert();
+        Actions actions = new Actions(driver);
 
-        //Открыть "Кошелек"
-        driver.findElement(By.xpath(ButtonWallet)).click();
 
-        //До открытия FAQ
-        byte[] screenshotAs = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        // Открыть "Кошелек"
+        driver.findElement(By.xpath(BUTTON_WALLET_XPATH)).click();
 
-        //Как пополнить баланс?
+        // До открытия FAQ
+        byte[] screenshotAs = ScreenshotHelper.takeScreenshot(driver);
+
+        // Как пополнить баланс?
         step("Как пополнить баланс?", Status.PASSED);
-        driver.findElements(By.xpath(CheckQuestions)).get(0).click();
-        Thread.sleep(200);
-        //Скролл вниз
-        js.executeScript("window.scrollBy(0,300)");
-        byte[] screenshot1 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        //Скролл вверх
-        js.executeScript("window.scrollBy(0,-300)");
-        //Закрываем активный блок
-        driver.findElements(By.xpath(CheckQuestions)).get(0).click();
+        WebElement question1 = driver.findElements(By.xpath(CHECK_QUESTIONS_XPATH)).get(0);
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question1).click().perform();
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Делаем скриншот через aShot
+        byte[] screenshot1 = takeFullPageScreenshot(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question1).click().perform();
 
-
-        //Как вывести средства?
+        // Как вывести средства?
         step("Как вывести средства?", Status.PASSED);
-        driver.findElements(By.xpath(CheckQuestions)).get(1).click();
-        Thread.sleep(200);
-        //Скролл вниз
-        js.executeScript("window.scrollBy(0,420)");
-        byte[] screenshot2 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        //Скролл вверх
-        js.executeScript("window.scrollBy(0,-420)");
-        //Закрываем активный блок
-        driver.findElements(By.xpath(CheckQuestions)).get(1).click();
+        WebElement question2 = driver.findElements(By.xpath(CHECK_QUESTIONS_XPATH)).get(1);
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question2).click().perform();
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Делаем скриншот через aShot
+        byte[] screenshot2 = takeFullPageScreenshot(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question2).click().perform();
+
 
         //Я вывел деньги, но они не пришли
         step("Я вывел деньги, но они не пришли", Status.PASSED);
-        driver.findElements(By.xpath(CheckQuestions)).get(2).click();
-        Thread.sleep(200);
-        //Скролл вниз
-        js.executeScript("window.scrollBy(0,250)");
-        byte[] screenshot3 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        //Скролл вверх
-        js.executeScript("window.scrollBy(0,-250)");
-        //Закрываем активный блок
-        driver.findElements(By.xpath(CheckQuestions)).get(2).click();
+        WebElement question3 = driver.findElements(By.xpath(CHECK_QUESTIONS_XPATH)).get(2);
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question3).click().perform();
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Делаем скриншот через aShot
+        byte[] screenshot3 = takeFullPageScreenshot(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question3).click().perform();
+
 
         //Существуют ли на сайте комиссии при пополнении и выводе?
         step("Существуют ли на сайте комиссии при пополнении и выводе?", Status.PASSED);
-        driver.findElements(By.xpath(CheckQuestions)).get(3).click();
-        Thread.sleep(200);
-        //Скролл вниз
-        js.executeScript("window.scrollBy(0,250)");
-        byte[] screenshot4 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        //Скролл вверх
-        js.executeScript("window.scrollBy(0,-250)");
-        //Закрываем активный блок
-        driver.findElements(By.xpath(CheckQuestions)).get(3).click();
+        WebElement question4 = driver.findElements(By.xpath(CHECK_QUESTIONS_XPATH)).get(3);
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question4).click().perform();
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Делаем скриншот через aShot
+        byte[] screenshot4 = takeFullPageScreenshot(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question4).click().perform();
 
         //Что такое “Промокод”?
         step("Что такое Промокод?", Status.PASSED);
-        driver.findElements(By.xpath(CheckQuestions)).get(4).click();
-        Thread.sleep(200);
-        //Скролл вниз
-        js.executeScript("window.scrollBy(0,250)");
-        byte[] screenshot5 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        //Скролл вверх
-        js.executeScript("window.scrollBy(0,-250)");
-        //Закрываем активный блок
-        driver.findElements(By.xpath(CheckQuestions)).get(4).click();
+        WebElement question5 = driver.findElements(By.xpath(CHECK_QUESTIONS_XPATH)).get(4);
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question5).click().perform();
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Делаем скриншот через aShot
+        byte[] screenshot5 = takeFullPageScreenshot(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question5).click().perform();
 
         //Как использовать промокод
         step("Как использовать промокод", Status.PASSED);
-        driver.findElements(By.xpath(CheckQuestions)).get(5).click();
-        Thread.sleep(200);
-        //Скролл вниз
-        js.executeScript("window.scrollBy(0,400)");
-        byte[] screenshot6 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        //Скролл вверх
-        js.executeScript("window.scrollBy(0,-400)");
-        //Закрываем активный блок
-        driver.findElements(By.xpath(CheckQuestions)).get(5).click();
+        WebElement question6 = driver.findElements(By.xpath(CHECK_QUESTIONS_XPATH)).get(5);
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question6).click().perform();
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Делаем скриншот через aShot
+        byte[] screenshot6 = takeFullPageScreenshot(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question6).click().perform();
 
         //Что такое “Бесплатные монеты”?
         step("Что такое Бесплатные монеты?", Status.PASSED);
-        driver.findElements(By.xpath(CheckQuestions)).get(6).click();
-        Thread.sleep(200);
-        //Скролл вниз
-        js.executeScript("window.scrollBy(0,250)");
-        byte[] screenshot7 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        //Скролл вверх
-        js.executeScript("window.scrollBy(0,-250)");
-        //Закрываем активный блок
-        driver.findElements(By.xpath(CheckQuestions)).get(6).click();
+        WebElement question7 = driver.findElements(By.xpath(CHECK_QUESTIONS_XPATH)).get(6);
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question7).click().perform();
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Делаем скриншот через aShot
+        byte[] screenshot7 = takeFullPageScreenshot(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question7).click().perform();
 
         //Где найти свой ID
         step("Где найти свой ID", Status.PASSED);
-        driver.findElements(By.xpath(CheckQuestions)).get(7).click();
-        Thread.sleep(200);
-        //Скролл вниз
-        js.executeScript("window.scrollBy(0,420)");
-        byte[] screenshot8 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        //Скролл
-        js.executeScript("window.scrollBy(0,-420)");
-        //Закрываем активный блок
-        driver.findElements(By.xpath(CheckQuestions)).get(7).click();
+        WebElement question8 = driver.findElements(By.xpath(CHECK_QUESTIONS_XPATH)).get(7);
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question8).click().perform();
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Делаем скриншот через aShot
+        byte[] screenshot8 = takeFullPageScreenshot(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question8).click().perform();
 
         //Привязка номера телефона
         step("Привязка номера телефона", Status.PASSED);
-        driver.findElements(By.xpath(CheckQuestions)).get(8).click();
-        Thread.sleep(200);
-        //Скролл вниз
-        js.executeScript("window.scrollBy(0,850)");
-        byte[] screenshot9 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        //Скролл
-        js.executeScript("window.scrollBy(0,-850)");
-        //Закрываем активный блок
-        driver.findElements(By.xpath(CheckQuestions)).get(8).click();
+        WebElement question9 = driver.findElements(By.xpath(CHECK_QUESTIONS_XPATH)).get(8);
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question9).click().perform();
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Делаем скриншот через aShot
+        byte[] screenshot9 = takeFullPageScreenshot(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question9).click().perform();
 
         //Не пришли деньги на депозит?
         step("Не пришли деньги на депозит?", Status.PASSED);
-        driver.findElements(By.xpath(CheckQuestions)).get(9).click();
-        Thread.sleep(200);
-        //Скролл вниз
-        js.executeScript("window.scrollBy(0,350)");
-        byte[] screenshot10 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        //Скролл
-        js.executeScript("window.scrollBy(0,-350)");
-        //Закрываем активный блок
-        driver.findElements(By.xpath(CheckQuestions)).get(9).click();
+        WebElement question10 = driver.findElements(By.xpath(CHECK_QUESTIONS_XPATH)).get(9);
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question10).click().perform();
+        //Ожидание загрузки страницы
+        waitForPageToLoad(driver);
+        //Делаем скриншот через aShot
+        byte[] screenshot10 = takeFullPageScreenshot(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question10).click().perform();
 
-        //Аллюр Аттач
+        // Аллюр Аттач
         Allure.attachment("Логи", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
         Allure.addAttachment("Скриншот: ДО", new ByteArrayInputStream(screenshotAs));
         Allure.addAttachment("Скриншот: Как пополнить баланс?", new ByteArrayInputStream(screenshot1));
@@ -161,7 +191,19 @@ public class Wallet {
         Allure.addAttachment("Скриншот: Привязка номера телефона", new ByteArrayInputStream(screenshot9));
         Allure.addAttachment("Скриншот: Не пришли деньги на депозит?", new ByteArrayInputStream(screenshot10));
 
-        //Сбор данных по проверкам
+        // Сравнение скриншотов
+        compareScreenshots("Ожидаемый результат: Как пополнить баланс?", screenshot1, "expected_screenshot1.png");
+        compareScreenshots("Ожидаемый результат: Как вывести средства?", screenshot2, "expected_screenshot2.png");
+        /*compareScreenshots("Ожидаемый результат: Я вывел деньги, но они не пришли", screenshot3, "expected_screenshot3.png");
+        compareScreenshots("Ожидаемый результат: Существуют ли на сайте комиссии при пополнении и выводе?", screenshot4, "expected_screenshot4.png");
+        compareScreenshots("Ожидаемый результат: Что такое Промокод?", screenshot5, "expected_screenshot5.png");
+        compareScreenshots("Ожидаемый результат: Как использовать промокод", screenshot6, "expected_screenshot6.png");
+        compareScreenshots("Ожидаемый результат: Что такое Бесплатные монеты?", screenshot7, "expected_screenshot7.png");
+        compareScreenshots("Ожидаемый результат: Где найти свой ID", screenshot8, "expected_screenshot8.png");
+        compareScreenshots("Ожидаемый результат: Привязка номера телефона", screenshot9, "expected_screenshot9.png");
+        compareScreenshots("Ожидаемый результат: Не пришли деньги на депозит?", screenshot10, "expected_screenshot10.png");*/
+
+        // Сбор данных по проверкам
         step("Сбор данных по проверкам", Status.PASSED);
         t.assertAll();
     }

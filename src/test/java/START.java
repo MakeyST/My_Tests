@@ -24,8 +24,6 @@ public class START {
     private MutableCapabilities caps;
 
     //Система
-    @Link(name = "Test", type = "https://ppgetx.click/")
-    @Link(name = "Prod", type = "https://get22.cfd/")
     @Epic("Запуск всех кейсов (конфиг)")
     @Owner("Makeenkov Igor")
     @Description("Запускаются как отдельно, так и все вместе, зависимости между кейсами отсутсвуют")
@@ -51,8 +49,7 @@ public class START {
         driver.manage().deleteAllCookies(); // Чистим куки
         step("Драйвер ===> ON", Status.PASSED);
     }
-    @Link(name = "Test", type = "https://ppgetx.click/")
-    @Link(name = "Prod", type = "https://get22.cfd/")
+
     @Epic("Авторизация")
     @Owner("Makeenkov Igor")
     @Feature("Авторизация + настройки браузера")
@@ -69,8 +66,6 @@ public class START {
         } catch (Exception e) {throw new RuntimeException(e);}}
 
 
-    @Link(name = "Test", type = "https://ppgetx.click/")
-    @Link(name = "Prod", type = "https://get22.cfd/")
     @Epic("ПРОФИЛЬ ЮЗЕРА")
     @Owner("Makeenkov Igor")
     @Step("Смена никнейма")
@@ -84,8 +79,6 @@ public class START {
             spu.nicknameEngRus(driver);
         } catch (Exception e) {throw new RuntimeException(e);}}
 
-    @Link(name = "Test", type = "https://ppgetx.click/")
-    @Link(name = "Prod", type = "https://get22.cfd/")
     @Epic("ПРОФИЛЬ ЮЗЕРА")
     @Step("Смена языка системы")
     @Owner("Makeenkov Igor")
@@ -99,8 +92,6 @@ public class START {
             spu.systemLanguage(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
-    @Link(name = "Test", type = "https://ppgetx.click/")
-    @Link(name = "Prod", type = "https://get22.cfd/")
     @Epic("ПРОФИЛЬ ЮЗЕРА")
     @Step("Использование промокода")
     @Owner("Makeenkov Igor")
@@ -114,8 +105,6 @@ public class START {
             spu.settingsPromoCode(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
-    @Link(name = "Test", type = "https://ppgetx.click/")
-    @Link(name = "Prod", type = "https://get22.cfd/")
     @Epic("ПРОФИЛЬ ЮЗЕРА")
     @Step("Проверка введенного промокода")
     @Owner("Makeenkov Igor")
@@ -129,8 +118,6 @@ public class START {
             spu.controlPromocode(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
-    @Link(name = "Test", type = "https://ppgetx.click/")
-    @Link(name = "Prod", type = "https://get22.cfd/")
     @Epic("ПРОФИЛЬ ЮЗЕРА")
     @Step("Смена пароля")
     @Owner("Makeenkov Igor")
@@ -144,8 +131,6 @@ public class START {
             spu.settingsPassword(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
-    @Link(name = "Test", type = "https://ppgetx.click/")
-    @Link(name = "Prod", type = "https://get22.cfd/")
     @Epic("ПРОФИЛЬ ЮЗЕРА")
     @Step("Возврат прошлого пароля")
     @Owner("Makeenkov Igor")
@@ -160,8 +145,6 @@ public class START {
         }catch (Exception e) {throw new RuntimeException(e);}}
 
 
-    @Link(name = "Test", type = "https://ppgetx.click/")
-    @Link(name = "Prod", type = "https://get22.cfd/")
     @Epic("ИГРЫ")
     @Owner("Makeenkov Igor")
     @Step("Игра Минер")
@@ -176,8 +159,6 @@ public class START {
         }catch (Exception e) {throw new RuntimeException(e);}}
 
 
-    @Link(name = "Test", type = "https://ppgetx.click/")
-    @Link(name = "Prod", type = "https://get22.cfd/")
     @Epic("БЫСТРЫЕ ИГРЫ")
     @Owner("Makeenkov Igor")
     @Step("Быстрая игра Минер")
@@ -191,8 +172,6 @@ public class START {
             GamesFast.quickMiner(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
-    @Link(name = "Test", type = "https://ppgetx.click/")
-    @Link(name = "Prod", type = "https://get22.cfd/")
     @Epic("СПОСОБЫ ОПЛАТЫ")
     @Owner("Makeenkov Igor")
     @Step("Оплата Сбербанк")
@@ -205,8 +184,6 @@ public class START {
             pay.paySber(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
-    @Link(name = "Test", type = "https://ppgetx.click/")
-    @Link(name = "Prod", type = "https://get22.cfd/")
     @Epic("СПОСОБЫ ОПЛАТЫ")
     @Owner("Makeenkov Igor")
     @Step("Оплата QIWI")
@@ -219,8 +196,6 @@ public class START {
             pay.payQIWI(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
-    @Link(name = "Test", type = "https://ppgetx.click/")
-    @Link(name = "Prod", type = "https://get22.cfd/")
     @Epic("СПОСОБЫ ОПЛАТЫ")
     @Owner("Makeenkov Igor")
     @Step("Оплата СБП")
@@ -233,8 +208,6 @@ public class START {
             pay.paySBP(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
-    @Link(name = "Test", type = "https://ppgetx.click/")
-    @Link(name = "Prod", type = "https://get22.cfd/")
     @Epic("СПОСОБЫ ОПЛАТЫ")
     @Owner("Makeenkov Igor")
     @Step("Оплата Yoomoney")
@@ -247,8 +220,6 @@ public class START {
             pay.payYoomoney(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
-    @Link(name = "Test", type = "https://ppgetx.click/")
-    @Link(name = "Prod", type = "https://get22.cfd/")
     @Epic("СПОСОБЫ ОПЛАТЫ")
     @Owner("Makeenkov Igor")
     @Step("Оплата Криптовалюты")
@@ -261,8 +232,6 @@ public class START {
             pay.payCrypto(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
-    @Link(name = "Test", type = "https://ppgetx.click/")
-    @Link(name = "Prod", type = "https://get22.cfd/")
     @Epic("ПОПУЛЯРНЫЕ ВОПРОСЫ (F.A.Q.)")
     @Owner("Makeenkov Igor")
     @Step("Общие вопросы")
@@ -275,8 +244,6 @@ public class START {
             FAQ.genQue(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
-    @Link(name = "Test", type = "https://ppgetx.click/")
-    @Link(name = "Prod", type = "https://get22.cfd/")
     @Epic("ПОПУЛЯРНЫЕ ВОПРОСЫ (F.A.Q.)")
     @Owner("Makeenkov Igor")
     @Step("Кошелек")

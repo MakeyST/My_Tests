@@ -1,7 +1,7 @@
 package Utils;
 
 import io.qameta.allure.Allure;
-import io.qameta.allure.Link;
+import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Step;
 import io.qameta.allure.model.Status;
@@ -12,7 +12,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
-import ru.yandex.qatools.allure.annotations.Description;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -21,14 +20,11 @@ import java.time.Duration;
 import static Utils.LocatorsAuthorization.LoginPro100igo228;
 import static Utils.LocatorsAuthorization.PasswordALLUSERS;
 import static io.qameta.allure.Allure.step;
-
-@Link(name = "Test", type = "https://ppgetx.click/")
-@Link(name = "Prod", type = "https://get22.cfd/")
 @Owner("Makeenkov Igor")
-@Description("Авторизация. Доступно несколько учетных записей, их нужно менять по необходимости")
-public class Authorization implements TestWatcher {
 
+public class Authorization implements TestWatcher {
     @Step("Авторизация")
+    @Description("Авторизация. Доступно несколько учетных записей, их нужно менять по необходимости")
     public void authorization(WebDriver driver) throws InterruptedException, IOException {
         System.out.println("-----Авторизация запущена-----");
         SoftAssert t = new SoftAssert();

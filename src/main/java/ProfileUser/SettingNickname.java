@@ -1,14 +1,10 @@
 package ProfileUser;
 
-import io.qameta.allure.Allure;
-import io.qameta.allure.Link;
-import io.qameta.allure.Owner;
-import io.qameta.allure.Step;
+import io.qameta.allure.*;
 import io.qameta.allure.model.Status;
 import org.openqa.selenium.*;
 import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
-import ru.yandex.qatools.allure.annotations.Description;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -17,7 +13,6 @@ import static ProfileUser.ConfigFileProfile.LocatorsProfleUser.GetXProfileTest;
 import static io.qameta.allure.Allure.step;
 
 @Owner("Makeenkov Igor")
-@Description("Смена никнейма")
 @Link(name = "Test", type = "https://ppgetx.click/profile")
 @Link(name = "Prod", type = "https://get22.cfd/profile")
 public class SettingNickname {
@@ -25,6 +20,7 @@ public class SettingNickname {
     String Nickname = "//input[@class=\"field field-group__field\"]";
     String Change = "//button[@class=\"btn field-group__btn\"]";
     @Step("Смена никнейма")
+    @Description("Смена никнейма")
     public void setNickname (WebDriver driver) throws InterruptedException, IOException {
         driver.get(GetXProfileTest);
         SoftAssert t = new SoftAssert();

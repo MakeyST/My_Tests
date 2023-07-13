@@ -1,6 +1,6 @@
 package Utils;
 
 public class LocatorsDriver {
-    public static String PROD = "https://get22.cfd/";
-    public static String Test = "https://ppgetx.click";
+    public static String PROD = "";
+    public static String Test = "https://gz62f.top/";
 }
