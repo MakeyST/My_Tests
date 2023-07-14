@@ -1,21 +1,22 @@
 package Payment;
 
+import Utils.LogUtils;
+import Utils.WaitUtils;
 import io.qameta.allure.Allure;
-import io.qameta.allure.Link;
 import io.qameta.allure.model.Status;
 import org.openqa.selenium.*;
+import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.time.Duration;
 
 import static Payment.ConfigFilePayment.LocatorsPayment.TestPromoCode;
 import static ProfileUser.ConfigFileProfile.LocatorsProfleUser.GetXProfileTest;
 import static io.qameta.allure.Allure.step;
 
-@Link(name = "Test", type = "https://ppgetx.click/")
-@Link(name = "Prod", type = "https://get22.cfd/")
 public class PaymentQIWI {
     String Wallet = "//button[@class=\"btn btn_shadow headline__balance-btn\"]";
     String PaymentMethods = "//button[@class=\"pay__option js-wives-hover js-ven-wives\"]";
@@ -26,13 +27,14 @@ public class PaymentQIWI {
     String Continue = "//button[@class=\"btn btn_big btn_shadow\"]";
     String ControlPayment = "//div[@class=\"transfer-timer__label\"]";
     public void paymentQIWI (WebDriver driver) throws InterruptedException, IOException {
+        WaitUtils waitUtils = new WaitUtils(driver, Duration.ofSeconds(10));
 
         //Перейти на сайт
         step("Перейти на сайт", Status.PASSED);
         driver.get(GetXProfileTest);
-        Thread.sleep(1000);
+        waitUtils.waitForPageToLoad();
         driver.navigate().refresh();
-        Thread.sleep(1000);
+        waitUtils.waitForPageToLoad();
 
         //Проверки
         SoftAssert t = new SoftAssert();
@@ -40,12 +42,12 @@ public class PaymentQIWI {
         //Клик по кнопке: "Кошелек"
         step("Клик по кнопке: Кошелек", Status.PASSED);
         driver.findElement(By.xpath(Wallet)).click();
-        Thread.sleep(700);
+        waitUtils.waitForPageToLoad();
 
         //Выбор метода оплаты QIWI
         step("Выбор метода оплаты QIWI", Status.PASSED);
         driver.findElements(By.xpath(PaymentMethods)).get(2).click();
-        Thread.sleep(300);
+        waitUtils.waitForPageToLoad();
 
         //Ручной ввод суммы
         step("Ручной ввод суммы", Status.PASSED);
@@ -53,7 +55,7 @@ public class PaymentQIWI {
         driver.findElement(By.xpath(DepositAmount)).sendKeys(Keys.CONTROL,"a");
         driver.findElement(By.xpath(DepositAmount)).sendKeys(Keys.DELETE);
         driver.findElement(By.xpath(DepositAmount)).sendKeys("200");
-        Thread.sleep(200);
+        waitUtils.waitForPageToLoad();
 
         //Проверка ручного ввода суммы
         step("Проверка ручного ввода суммы", Status.PASSED);
@@ -66,7 +68,7 @@ public class PaymentQIWI {
         //Кнопка 200
         step("Кнопка 200", Status.PASSED);
         driver.findElements(By.xpath(ButtonDeposit)).get(0).click();
-        Thread.sleep(200);
+        waitUtils.waitForPageToLoad();
         //Проверка кнопки 200
         step("Проверка кнопки 200руб", Status.PASSED);
         String TextClick200 =  driver.findElement(By.xpath(DepositAmount)).getAttribute("value");
@@ -78,7 +80,7 @@ public class PaymentQIWI {
         //Кнопка 500
         step("Кнопка 500", Status.PASSED);
         driver.findElements(By.xpath(ButtonDeposit)).get(1).click();
-        Thread.sleep(200);
+        waitUtils.waitForPageToLoad();
         //Проверка кнопки 500
         step("Проверка кнопки 500", Status.PASSED);
         String TextClick500 =  driver.findElement(By.xpath(DepositAmount)).getAttribute("value");
@@ -90,7 +92,7 @@ public class PaymentQIWI {
         //Кнопка 1000
         step("Кнопка 1000", Status.PASSED);
         driver.findElements(By.xpath(ButtonDeposit)).get(2).click();
-        Thread.sleep(200);
+        waitUtils.waitForPageToLoad();
         //Проверка кнопки 1000
         step("Проверка кнопки 1000", Status.PASSED);
         String TextClick1000 =  driver.findElement(By.xpath(DepositAmount)).getAttribute("value");
@@ -102,7 +104,7 @@ public class PaymentQIWI {
         //Кнопка 2500
         step("Кнопка 2500", Status.PASSED);
         driver.findElements(By.xpath(ButtonDeposit)).get(3).click();
-        Thread.sleep(200);
+        waitUtils.waitForPageToLoad();
         //Проверка кнопки 2500
         step("Проверка кнопки 2500", Status.PASSED);
         String TextClick2500 =  driver.findElement(By.xpath(DepositAmount)).getAttribute("value");
@@ -114,7 +116,7 @@ public class PaymentQIWI {
         //Кнопка 5000
         step("Кнопка 5000", Status.PASSED);
         driver.findElements(By.xpath(ButtonDeposit)).get(4).click();
-        Thread.sleep(200);
+        waitUtils.waitForPageToLoad();
         //Проверка кнопки 5000
         step("Проверка кнопки 5000", Status.PASSED);
         String TextClick5000 =  driver.findElement(By.xpath(DepositAmount)).getAttribute("value");
@@ -126,7 +128,7 @@ public class PaymentQIWI {
         //Кнопка 10 000
         step("Кнопка 10 000", Status.PASSED);
         driver.findElements(By.xpath(ButtonDeposit)).get(5).click();
-        Thread.sleep(200);
+        waitUtils.waitForPageToLoad();
         //Проверка кнопки 10 000
         step("Проверка кнопки 10 000", Status.PASSED);
         String TextClick10000 =  driver.findElement(By.xpath(DepositAmount)).getAttribute("value");
@@ -138,7 +140,7 @@ public class PaymentQIWI {
         //Кнопка 20 000
         step("Кнопка 20 000", Status.PASSED);
         driver.findElements(By.xpath(ButtonDeposit)).get(6).click();
-        Thread.sleep(200);
+        waitUtils.waitForPageToLoad();
         //Проверка кнопки 20 000
         step("Проверка кнопки 20000руб", Status.PASSED);
         String TextClick20000 =  driver.findElement(By.xpath(DepositAmount)).getAttribute("value");
@@ -150,12 +152,12 @@ public class PaymentQIWI {
         //Нажать кнопку: "У меня есть промокод"
         step("Нажать кнопку: У меня есть промокод", Status.PASSED);
         driver.findElement(By.xpath(ButtonPromoCode)).click();
-        Thread.sleep(300);
+        waitUtils.waitForPageToLoad();
 
         //Ввод промокода (Test работоспособности поля)
         step("Ввод промокода (Test работоспособности поля)", Status.PASSED);
         driver.findElement(By.xpath(InputPromoCode)).sendKeys(TestPromoCode);
-        Thread.sleep(150);
+        waitUtils.waitForPageToLoad();
 
         //Проверка поля промокод
         step("Проверка поля промокод", Status.PASSED);
@@ -168,11 +170,11 @@ public class PaymentQIWI {
         //Нажать кнопку: "Продолжить"
         step("Нажать кнопку: Продолжить", Status.PASSED);
         driver.findElement(By.xpath(Continue)).click();
-        Thread.sleep(2000);
+        waitUtils.waitForPageToLoad();
 
         //Скриншот
         step("Скриншот", Status.PASSED);
-        Thread.sleep(400);
+        waitUtils.waitForPageToLoad();
         byte[] PaymentQIWI = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
 
@@ -185,7 +187,9 @@ public class PaymentQIWI {
         System.out.println("*Проверка попапа оплаты сбера, ---> выполнено*");
 
         //Аллюр Аттач
-        Allure.attachment("Логи", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        LogEntries browserLogs = driver.manage().logs().get(LogType.BROWSER);
+        String formattedLogs = LogUtils.formatBrowserLogs(browserLogs);
+        Allure.attachment("Логи", formattedLogs);
         Allure.addAttachment("Скриншот: Страницы оплаты киви", new ByteArrayInputStream(PaymentQIWI));
 
         //Сбор данных по проверкам

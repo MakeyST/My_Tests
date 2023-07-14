@@ -1,21 +1,22 @@
 package Payment;
 
+import Utils.LogUtils;
+import Utils.WaitUtils;
 import io.qameta.allure.Allure;
-import io.qameta.allure.Link;
 import io.qameta.allure.model.Status;
 import org.openqa.selenium.*;
+import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.time.Duration;
 
 import static Payment.ConfigFilePayment.LocatorsPayment.WalletNumber;
 import static ProfileUser.ConfigFileProfile.LocatorsProfleUser.GetXProfileTest;
 import static io.qameta.allure.Allure.step;
 
-@Link(name = "Test", type = "https://ppgetx.click/")
-@Link(name = "Prod", type = "https://get22.cfd/")
 public class PaymentCrypto {
     String Wallet = "//button[@class=\"btn btn_shadow headline__balance-btn\"]";
     String PaymentMethods = "//button[@class=\"pay__option js-wives-hover js-ven-wives\"]";
@@ -24,12 +25,13 @@ public class PaymentCrypto {
     String ConvertBTC = "//input[@class=\"crypto-course__value\"]";
     String ConvertRUB = "//input[@class=\"crypto-course__value\"]";
     public void paymentCrypto (WebDriver driver) throws InterruptedException, IOException {
+        WaitUtils waitUtils = new WaitUtils(driver, Duration.ofSeconds(10));
         //Перейти на сайт
         step("Перейти на сайт", Status.PASSED);
         driver.get(GetXProfileTest);
-        Thread.sleep(1000);
+        waitUtils.waitForPageToLoad();
         driver.navigate().refresh();
-        Thread.sleep(1000);
+        waitUtils.waitForPageToLoad();
 
         //Проверки
         SoftAssert t = new SoftAssert();
@@ -37,22 +39,22 @@ public class PaymentCrypto {
         //Клик по кнопке: "Кошелек"
         step("Клик по кнопке: Кошелек", Status.PASSED);
         driver.findElement(By.xpath(Wallet)).click();
-        Thread.sleep(700);
+        waitUtils.waitForPageToLoad();
 
         //Выбор метода оплаты Криптовалюта
         step("Выбор метода оплаты Криптовалюта", Status.PASSED);
         driver.findElements(By.xpath(PaymentMethods)).get(4).click();
-        Thread.sleep(300);
+        waitUtils.waitForPageToLoad();
 
         //Выбор BTC
         step("Выбор BTC", Status.PASSED);
         driver.findElements(By.xpath(Currency)).get(0).click();
-        Thread.sleep(300);
+        waitUtils.waitForPageToLoad();
 
         //Выбор сети btc
         step("Выбор сети btc", Status.PASSED);
         driver.findElements(By.xpath(Currency)).get(8).click();
-        Thread.sleep(900);
+        waitUtils.waitForPageToLoad();
 
         //Проверка адреса для депозита BTC
         step("Проверка адреса для депозита BTC", Status.PASSED);
@@ -87,11 +89,13 @@ public class PaymentCrypto {
 
         //Скриншот
         step("Скриншот", Status.PASSED);
-        Thread.sleep(400);
+        waitUtils.waitForPageToLoad();
         byte[] PaymentCrypto = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
         //Аллюр Аттач
-        Allure.attachment("Логи", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        LogEntries browserLogs = driver.manage().logs().get(LogType.BROWSER);
+        String formattedLogs = LogUtils.formatBrowserLogs(browserLogs);
+        Allure.attachment("Логи", formattedLogs);
         Allure.addAttachment("Скриншот: Страницы оплаты крипта", new ByteArrayInputStream(PaymentCrypto));
 
         //Сбор данных по проверкам

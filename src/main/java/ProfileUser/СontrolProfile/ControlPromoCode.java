@@ -1,5 +1,7 @@
 package ProfileUser.СontrolProfile;
 
+import Utils.LogUtils;
+import Utils.WaitUtils;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
@@ -7,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogType;
 
 import java.io.ByteArrayInputStream;
@@ -21,18 +24,21 @@ public class ControlPromoCode {
     String Bonuses = "//button[@class=\"button-group__link\"]";
     @Description("Проверка, что промокод успешно активирован")
     public void controlPromoCode (WebDriver driver) throws InterruptedException, IOException {
+        WaitUtils waitUtils = new WaitUtils(driver, Duration.ofSeconds(10));
 
         driver.get(GetXProfileHistory);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        waitUtils.waitForPageToLoad();
 
         driver.findElements(By.xpath(Bonuses)).get(2).click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        waitUtils.waitForPageToLoad();
 
-        Thread.sleep(3000);
+        waitUtils.waitForPageToLoad();
 
         //После
         byte[] controlPromocodeScreen = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        Allure.attachment("Промокоды", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        LogEntries browserLogs = driver.manage().logs().get(LogType.BROWSER);
+        String formattedLogs = LogUtils.formatBrowserLogs(browserLogs);
+        Allure.attachment("Логи", formattedLogs);
         Allure.addAttachment("Скриншот: Успешно примененного промокода", new ByteArrayInputStream(controlPromocodeScreen));
 
     }

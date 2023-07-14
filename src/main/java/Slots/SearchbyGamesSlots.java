@@ -1,21 +1,26 @@
 package Slots;
 
+import Utils.LogUtils;
+import Utils.WaitUtils;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.*;
+import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.time.Duration;
 
 import static Slots.ConfigFileSlots.LocatorsSlots.*;
 
 
 public class SearchbyGamesSlots {
     public void searchbyGamesSlots (WebDriver driver) throws InterruptedException, IOException {
+        WaitUtils waitUtils = new WaitUtils(driver, Duration.ofSeconds(10));
         SoftAssert t = new SoftAssert();
         driver.get(GetX_Slots);
-        Thread.sleep(1000);
+        waitUtils.waitForPageToLoad();
 
         //До
         byte[] set_Search_by_Games_Slots_Before = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
@@ -54,7 +59,9 @@ public class SearchbyGamesSlots {
         t.assertNotNull(TextSearch_by_Games_Slots01);
 
         //Проверки и отчеты
-        Allure.attachment("Логи", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        LogEntries browserLogs = driver.manage().logs().get(LogType.BROWSER);
+        String formattedLogs = LogUtils.formatBrowserLogs(browserLogs);
+        Allure.attachment("Логи", formattedLogs);
         Allure.addAttachment("Скриншот: До начала поиска Cleo's Gold", new ByteArrayInputStream(set_Search_by_Games_Slots_Before));
         Allure.addAttachment("Скриншот: Поиск Cleo's Gold", new ByteArrayInputStream(set_Search_by_Games_Slots_After));
         Allure.addAttachment("Скриншот: До начала поиска Crazy Monkey", new ByteArrayInputStream(set_Search_by_Games_Slots_Before01));

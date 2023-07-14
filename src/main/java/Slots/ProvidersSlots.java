@@ -1,20 +1,25 @@
 package Slots;
 
+import Utils.LogUtils;
+import Utils.WaitUtils;
 import io.qameta.allure.Allure;
 import org.openqa.selenium.*;
+import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.time.Duration;
 
 import static Slots.ConfigFileSlots.LocatorsSlots.*;
 
 public class ProvidersSlots {
     public void providerSlots (WebDriver driver) throws InterruptedException, IOException {
+        WaitUtils waitUtils = new WaitUtils(driver, Duration.ofSeconds(10));
         SoftAssert t = new SoftAssert();
         driver.get(GetX_Slots);
-        Thread.sleep(1000);
+        waitUtils.waitForPageToLoad();
 
         //До
         byte[] set_Providers_Before = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
@@ -36,13 +41,15 @@ public class ProvidersSlots {
 
         //Выбираем DLV
         driver.findElements(By.xpath(Dlv_filter)).get(35).click();
-        Thread.sleep(500);
+        waitUtils.waitForPageToLoad();
 
         //После
         byte[] set_Providers_After = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
         //Проверки и отчеты
-        Allure.attachment("Логи", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        LogEntries browserLogs = driver.manage().logs().get(LogType.BROWSER);
+        String formattedLogs = LogUtils.formatBrowserLogs(browserLogs);
+        Allure.attachment("Логи", formattedLogs);
         Allure.addAttachment("Скриншот: До всех действий", new ByteArrayInputStream(set_Providers_Before));
         Allure.addAttachment("Скриншот: Выполнили поиск", new ByteArrayInputStream(set_Providers_Dlv));
         Allure.addAttachment("Скриншот: После того как все выполнили", new ByteArrayInputStream(set_Providers_After));

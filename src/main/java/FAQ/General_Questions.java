@@ -1,22 +1,31 @@
 package FAQ;
 
+import Utils.LogUtils;
+import Utils.WaitUtils;
 import io.qameta.allure.Allure;
 import io.qameta.allure.model.Status;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.time.Duration;
 
 import static FAQ.ConfigFileFAQ.LocatorsFAQ.GetXFAQ;
+import static Utils.ScreenshotHelper.takeFullPageScreenshot;
 import static io.qameta.allure.Allure.step;
 
 public class General_Questions {
-    String CheckQuestions = "//button[@class=\"spoiler-block__title\"]";
-    String BlockContentCheck = "//div[@class=\"spoiler-block__content content\"]";
+    private static final String CHECK_QUESTIONS_XPATH = "//button[@class=\"spoiler-block__title\"]";
+
     public void general_Questions (WebDriver driver) throws InterruptedException, IOException {
+        WaitUtils waitUtils = new WaitUtils(driver, Duration.ofSeconds(10));
         driver.get(GetXFAQ);
+        waitUtils.waitForPageToLoad();
+        Actions actions = new Actions(driver);
         SoftAssert t = new SoftAssert();
         JavascriptExecutor js = ((JavascriptExecutor) driver);
 
@@ -26,96 +35,109 @@ public class General_Questions {
 
         //Что это за сайт?
         step("Что это за сайт?", Status.PASSED);
-        driver.findElements(By.xpath(CheckQuestions)).get(0).click();
-        Thread.sleep(200);
-        //Скролл вниз
-        js.executeScript("window.scrollBy(0,300)");
-        byte[] screenshot1 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        //Скролл вверх
-        js.executeScript("window.scrollBy(0,-300)");
-        //Закрываем активный блок
-        driver.findElements(By.xpath(CheckQuestions)).get(0).click();
+        WebElement question1 = driver.findElements(By.xpath(CHECK_QUESTIONS_XPATH)).get(0);
+        //Ожидание загрузки страницы
+        waitUtils.waitForPageToLoad();
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question1).click().perform();
+        //Ожидание загрузки страницы
+        waitUtils.waitForPageToLoad();
+        //Делаем скриншот через aShot
+        byte[] screenshot1 = takeFullPageScreenshot(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question1).click().perform();
 
 
         //Как здесь играть?
         step("Как здесь играть?", Status.PASSED);
-        driver.findElements(By.xpath(CheckQuestions)).get(1).click();
-        Thread.sleep(200);
-        //Скролл вниз
-        js.executeScript("window.scrollBy(0,300)");
-        byte[] screenshot2 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        //Скролл вверх
-        js.executeScript("window.scrollBy(0,-300)");
-        //Закрываем активный блок
-        driver.findElements(By.xpath(CheckQuestions)).get(1).click();
+        WebElement question2 = driver.findElements(By.xpath(CHECK_QUESTIONS_XPATH)).get(1);
+        //Ожидание загрузки страницы
+        waitUtils.waitForPageToLoad();
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question2).click().perform();
+        //Ожидание загрузки страницы
+        waitUtils.waitForPageToLoad();
+        //Делаем скриншот через aShot
+        byte[] screenshot2 = takeFullPageScreenshot(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question2).click().perform();
 
         //Могу ли я регистрировать несколько аккаунтов?
         step("Могу ли я регистрировать несколько аккаунтов?", Status.PASSED);
-        driver.findElements(By.xpath(CheckQuestions)).get(2).click();
-        Thread.sleep(200);
-        //Скролл вниз
-        js.executeScript("window.scrollBy(0,300)");
-        byte[] screenshot3 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        //Скролл вверх
-        js.executeScript("window.scrollBy(0,-300)");
-        //Закрываем активный блок
-        driver.findElements(By.xpath(CheckQuestions)).get(2).click();
+        WebElement question3 = driver.findElements(By.xpath(CHECK_QUESTIONS_XPATH)).get(2);
+        //Ожидание загрузки страницы
+        waitUtils.waitForPageToLoad();
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question3).click().perform();
+        //Ожидание загрузки страницы
+        waitUtils.waitForPageToLoad();
+        //Делаем скриншот через aShot
+        byte[] screenshot3 = takeFullPageScreenshot(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question3).click().perform();
 
         //Мошенничество
         step("Мошенничество", Status.PASSED);
-        driver.findElements(By.xpath(CheckQuestions)).get(3).click();
-        Thread.sleep(200);
-        //Скролл вниз
-        js.executeScript("window.scrollBy(0,300)");
-        byte[] screenshot4 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        //Скролл вверх
-        js.executeScript("window.scrollBy(0,-300)");
-        //Закрываем активный блок
-        driver.findElements(By.xpath(CheckQuestions)).get(3).click();
+        WebElement question4 = driver.findElements(By.xpath(CHECK_QUESTIONS_XPATH)).get(3);
+        //Ожидание загрузки страницы
+        waitUtils.waitForPageToLoad();
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question4).click().perform();
+        //Ожидание загрузки страницы
+        waitUtils.waitForPageToLoad();
+        //Делаем скриншот через aShot
+        byte[] screenshot4 = takeFullPageScreenshot(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question4).click().perform();
 
         //Как работают наши игры
         step("Как работают наши игры", Status.PASSED);
-        driver.findElements(By.xpath(CheckQuestions)).get(4).click();
-        Thread.sleep(200);
-        //Скролл вниз
-        js.executeScript("window.scrollBy(0,300)");
-        byte[] screenshot5 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        //Скролл вверх
-        js.executeScript("window.scrollBy(0,-300)");
-        //Закрываем активный блок
-        driver.findElements(By.xpath(CheckQuestions)).get(4).click();
+        WebElement question5 = driver.findElements(By.xpath(CHECK_QUESTIONS_XPATH)).get(4);
+        //Ожидание загрузки страницы
+        waitUtils.waitForPageToLoad();
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question5).click().perform();
+        //Ожидание загрузки страницы
+        waitUtils.waitForPageToLoad();
+        //Делаем скриншот через aShot
+        byte[] screenshot5 = takeFullPageScreenshot(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question5).click().perform();
 
         //Нарушение правил и блокировака аккаунта
         step("Нарушение правил и блокировака аккаунта", Status.PASSED);
-        driver.findElements(By.xpath(CheckQuestions)).get(5).click();
-        Thread.sleep(200);
-        //Скролл вниз
-        js.executeScript("window.scrollBy(0,400)");
-        byte[] screenshot6 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        //Скролл вверх
-        js.executeScript("window.scrollBy(0,-400)");
-        //Закрываем активный блок
-        driver.findElements(By.xpath(CheckQuestions)).get(5).click();
+        WebElement question6 = driver.findElements(By.xpath(CHECK_QUESTIONS_XPATH)).get(5);
+        //Ожидание загрузки страницы
+        waitUtils.waitForPageToLoad();
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question6).click().perform();
+        //Ожидание загрузки страницы
+        waitUtils.waitForPageToLoad();
+        //Делаем скриншот через aShot
+        byte[] screenshot6 = takeFullPageScreenshot(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question6).click().perform();
 
         //Верификация
         step("Верификация", Status.PASSED);
-        driver.findElements(By.xpath(CheckQuestions)).get(6).click();
-        Thread.sleep(200);
-        //Скролл вниз
-        js.executeScript("window.scrollBy(0,580)");
-        //Уменьшаем масштаб страницы
-        ((JavascriptExecutor) driver).executeScript("document.body.style.zoom = '80%';");
-        byte[] screenshot7 = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        //Скролл вверх
-        js.executeScript("window.scrollBy(0,-580)");
-        //Возврат в исходное состояние
-        ((JavascriptExecutor) driver).executeScript("document.body.style.zoom = '100%';");
-        //Закрываем активный блок
-        driver.findElements(By.xpath(CheckQuestions)).get(6).click();
+        step("Что такое Бесплатные монеты?", Status.PASSED);
+        WebElement question7 = driver.findElements(By.xpath(CHECK_QUESTIONS_XPATH)).get(6);
+        //Ожидание загрузки страницы
+        waitUtils.waitForPageToLoad();
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question7).click().perform();
+        //Ожидание загрузки страницы
+        waitUtils.waitForPageToLoad();
+        //Делаем скриншот через aShot
+        byte[] screenshot7 = takeFullPageScreenshot(driver);
+        //Скролим, пока элемент не появится в видимой области для клика
+        actions.moveToElement(question7).click().perform();
 
 
-        //Аллюр Аттач
-        Allure.attachment("Логи", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        // Аллюр Аттач
+        LogEntries browserLogs = driver.manage().logs().get(LogType.BROWSER);
+        String formattedLogs = LogUtils.formatBrowserLogs(browserLogs);
+        Allure.attachment("Логи", formattedLogs);
         Allure.addAttachment("Скриншот: ДО", new ByteArrayInputStream(screenshotAs));
         Allure.addAttachment("Скриншот: Что это за сайт?", new ByteArrayInputStream(screenshot1));
         Allure.addAttachment("Скриншот: Как здесь играть?", new ByteArrayInputStream(screenshot2));

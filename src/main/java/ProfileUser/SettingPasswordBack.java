@@ -1,30 +1,32 @@
 package ProfileUser;
 
+import Utils.LogUtils;
+import Utils.WaitUtils;
 import io.qameta.allure.Allure;
-import io.qameta.allure.Link;
 import io.qameta.allure.model.Status;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.time.Duration;
 
 import static ProfileUser.ConfigFileProfile.LocatorsProfleUser.*;
 import static io.qameta.allure.Allure.step;
-@Link(name = "Test", type = "https://ppgetx.click/profile/setting")
-@Link(name = "Prod", type = "https://get22.cfd/profile/setting")
 public class SettingPasswordBack {
     String InputOldPassword = "//input[@class=\"field field-group__field field_icon\"]";
 
     public void setPasswordBack (WebDriver driver) throws InterruptedException, IOException {
+        WaitUtils waitUtils = new WaitUtils(driver, Duration.ofSeconds(10));
         //Перейти на сайт
         step("Перейти на сайт", Status.PASSED);
         driver.get(GetXProfileTest);
-        Thread.sleep(300);
+        waitUtils.waitForPageToLoad();
 
         //Проверки
         SoftAssert t = new SoftAssert();
@@ -32,9 +34,9 @@ public class SettingPasswordBack {
         //Старый пароль
         step("Старый пароль", Status.PASSED);
         driver.findElements(By.xpath(InputOldPassword)).get(0).click();
-        Thread.sleep(200);
+        waitUtils.waitForPageToLoad();
         driver.findElements(By.xpath(InputOldPassword)).get(0).sendKeys(OldPassword);
-        Thread.sleep(200);
+        waitUtils.waitForPageToLoad();
 
         //Проверка старого пароля
         step("Проверка старого пароля", Status.PASSED);
@@ -47,9 +49,9 @@ public class SettingPasswordBack {
         //Новый пароль
         step("Новый пароль", Status.PASSED);
         driver.findElements(By.xpath(InputOldPassword)).get(1).click();
-        Thread.sleep(200);
+        waitUtils.waitForPageToLoad();
         driver.findElements(By.xpath(InputOldPassword)).get(1).sendKeys(NewPassword);
-        Thread.sleep(200);
+        waitUtils.waitForPageToLoad();
 
         //Проверка нового пароля
         step("Проверка нового пароля", Status.PASSED);
@@ -62,9 +64,9 @@ public class SettingPasswordBack {
         //Повторить новый пароль
         step("Повторить новый пароль", Status.PASSED);
         driver.findElements(By.xpath(InputOldPassword)).get(2).click();
-        Thread.sleep(200);
+        waitUtils.waitForPageToLoad();
         driver.findElements(By.xpath(InputOldPassword)).get(2).sendKeys(ConfirmPassword);
-        Thread.sleep(200);
+        waitUtils.waitForPageToLoad();
 
         //Проверка повтора нового пароля
         step("Проверка повтора нового пароля", Status.PASSED);
@@ -73,11 +75,13 @@ public class SettingPasswordBack {
         t.assertEquals(TextConfirmPassword, ExpectedConfirmPassword, "Проверка поля Подтверждения нового пароля ПРОВАЛЕНА!");
         t.assertNotNull(TextConfirmPassword);
         System.out.println("*Проверка поля Подтверждения нового пароля, ---> выполнено*");
-        Thread.sleep(500);
+        waitUtils.waitForPageToLoad();
         byte[] setPasswordBack = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
         //Аллюр Аттач
-        Allure.attachment("Логи", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        LogEntries browserLogs = driver.manage().logs().get(LogType.BROWSER);
+        String formattedLogs = LogUtils.formatBrowserLogs(browserLogs);
+        Allure.attachment("Логи", formattedLogs);
         Allure.addAttachment("Скриншот: Пароль успешно изменен(вернули старый)", new ByteArrayInputStream(setPasswordBack));
 
         //Выход

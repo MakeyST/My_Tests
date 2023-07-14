@@ -1,39 +1,41 @@
 package ProfileUser;
 
+import Utils.LogUtils;
+import Utils.WaitUtils;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
-import io.qameta.allure.Link;
 import io.qameta.allure.Owner;
 import io.qameta.allure.model.Status;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogType;
 import org.testng.asserts.SoftAssert;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.time.Duration;
 
 import static ProfileUser.ConfigFileProfile.LocatorsProfleUser.GetXProfileTest;
 import static ProfileUser.ConfigFileProfile.LocatorsProfleUser.promo;
 import static io.qameta.allure.Allure.step;
-@Link(name = "Test", type = "https://ppgetx.click/profile")
-@Link(name = "Prod", type = "https://get22.cfd/profile")
 @Owner("Makeenkov Igor")
 public class SettingPromoCode {
     String InputPromoCode = "//input[@class=\"field field-group__field\"]";
     String ApplyPromoCode = "//button[@class=\"btn field-group__btn\"]";
     @Description("Промокоды в профиле юзера")
     public void settingPromoCode(WebDriver driver) throws InterruptedException, IOException {
+        WaitUtils waitUtils = new WaitUtils(driver, Duration.ofSeconds(10));
         SoftAssert t = new SoftAssert();
         driver.get(GetXProfileTest);
-        Thread.sleep(1000);
+        waitUtils.waitForPageToLoad();
 
         //Клик по полю ввода промокода + ввод промокода
         step("Клик по полю ввода промокода + ввод промокода", Status.PASSED);
         driver.findElement(By.xpath(InputPromoCode)).sendKeys(promo);
-        Thread.sleep(500);
+        waitUtils.waitForPageToLoad();
 
         //Проверка введенного промокода
         step("Проверка введенного промокода", Status.PASSED);
@@ -46,11 +48,13 @@ public class SettingPromoCode {
         //Применить
         step("Применить", Status.PASSED);
         driver.findElement(By.xpath(ApplyPromoCode)).click();
-        Thread.sleep(400);
+        waitUtils.waitForPageToLoad();
         byte[] settingPromoCode = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
         //Аллюр Аттач
-        Allure.attachment("Логи", String.valueOf(driver.manage().logs().get(LogType.BROWSER).getAll()));
+        LogEntries browserLogs = driver.manage().logs().get(LogType.BROWSER);
+        String formattedLogs = LogUtils.formatBrowserLogs(browserLogs);
+        Allure.attachment("Логи", formattedLogs);
         Allure.addAttachment("Скриншот: Промокод введен", new ByteArrayInputStream(settingPromoCode));
         t.assertAll();
     }
