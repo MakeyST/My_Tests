@@ -15,44 +15,45 @@ import java.time.Duration;
 import static Slots.ConfigFileSlots.LocatorsSlots.*;
 
 public class ResetSlots {
-    public void resetSlots (WebDriver driver) throws InterruptedException, IOException {
+    public void resetSlots(WebDriver driver) throws InterruptedException, IOException {
         WaitUtils waitUtils = new WaitUtils(driver, Duration.ofSeconds(10));
         SoftAssert t = new SoftAssert();
         driver.get(GetX_Slots);
         waitUtils.waitForPageToLoad();
 
-        //До
+        // Сделаем скриншот до выполнения действий
         byte[] set_Reset_button_Slots_Before = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
-        //Кликаем по полю поиска и вводим данные
-        driver.findElements(By.xpath(Input_Search)).get(3).click();
-        driver.findElements(By.xpath(Input_Search)).get(3).sendKeys(Keys.CONTROL,"a");
-        driver.findElements(By.xpath(Input_Search)).get(3).sendKeys(Keys.DELETE);
-        driver.findElements(By.xpath(Input_Search)).get(3).sendKeys(Cleos_Gold);
+        // Кликаем по полю поиска и вводим данные
+        WebElement searchInput = driver.findElements(By.xpath(Input_Search)).get(3);
+        searchInput.click();
+        searchInput.sendKeys(Keys.CONTROL, "a");
+        searchInput.sendKeys(Keys.DELETE);
+        searchInput.sendKeys(Cleos_Gold);
 
-        //Нашли
+        // Сделаем скриншот после ввода данных
         byte[] set_Reset_button_Slots_CleosSlot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
-        //Проверка введеных данных
-        String TextSearch_by_Games_Slots =  driver.findElements(By.xpath(Input_Search)).get(3).getAttribute("value");
-        String ExpectedSearch_by_Games_Slots = Cleos_Gold;
-        t.assertEquals(TextSearch_by_Games_Slots, ExpectedSearch_by_Games_Slots, "Проверка поля поиска. Игра: Cleo's Gold, ПРОВАЛЕНА!");
-        t.assertNotNull(TextSearch_by_Games_Slots);
+        // Проверка введенных данных
+        String textSearchByGamesSlots = searchInput.getAttribute("value");
+        String expectedSearchByGamesSlots = Cleos_Gold;
+        t.assertEquals(textSearchByGamesSlots, expectedSearchByGamesSlots, "Проверка поля поиска. Игра: Cleo's Gold, ПРОВАЛЕНА!");
+        t.assertNotNull(textSearchByGamesSlots);
 
-        //Нажимаем кнопку "Сбросить"
+        // Нажимаем кнопку "Сбросить"
         driver.findElement(By.xpath(Button_Reset)).click();
         waitUtils.waitForPageToLoad();
 
-        //Проверка кнопки Сбросить
-        String TextReset = driver.findElement(By.xpath(TextResetdiv)).getText();
-        String ExpectedReset = Reset;
-        t.assertEquals(TextReset, ExpectedReset, "Проверка кнопки Сбросить, ПРОВАЛЕНА!");
-        t.assertNotNull(TextReset);
+        // Проверка кнопки "Сбросить"
+        String textReset = driver.findElement(By.xpath(TextResetdiv)).getText();
+        String expectedReset = Reset;
+        t.assertEquals(textReset, expectedReset, "Проверка кнопки Сбросить, ПРОВАЛЕНА!");
+        t.assertNotNull(textReset);
 
-        //После
+        // Сделаем скриншот после выполнения всех действий
         byte[] set_Reset_button_Slots_After = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
-        //Проверки и отчеты
+        // Проверки и отчеты
         LogEntries browserLogs = driver.manage().logs().get(LogType.BROWSER);
         String formattedLogs = LogUtils.formatBrowserLogs(browserLogs);
         Allure.attachment("Логи", formattedLogs);
@@ -60,9 +61,5 @@ public class ResetSlots {
         Allure.addAttachment("Скриншот: Выполнили поиск", new ByteArrayInputStream(set_Reset_button_Slots_CleosSlot));
         Allure.addAttachment("Скриншот: После того как все выполнили", new ByteArrayInputStream(set_Reset_button_Slots_After));
         t.assertAll();
-
-
-
-
     }
 }

@@ -19,29 +19,28 @@ import static Slots.ConfigFileSlots.LocatorsSlots.GetX_Slots;
 import static Slots.ConfigFileSlots.LocatorsSlots.Recent_button;
 
 public class RecentSlots {
-    public void recentSlots (WebDriver driver) throws InterruptedException, IOException {
+    public void recentSlots(WebDriver driver) throws InterruptedException, IOException {
         WaitUtils waitUtils = new WaitUtils(driver, Duration.ofSeconds(10));
         SoftAssert t = new SoftAssert();
         driver.get(GetX_Slots);
         waitUtils.waitForPageToLoad();
 
-        //До
-        byte[] set_Resent_Before = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        // Сделаем скриншот до выполнения действий
+        byte[] set_Recent_Before = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
-        //Недавние игры
+        // Кликаем на кнопку "Недавние игры"
         driver.findElements(By.xpath(Recent_button)).get(1).click();
         waitUtils.waitForPageToLoad();
 
-        //После
-        byte[] set_Resent_After = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        // Сделаем скриншот после выполнения действий
+        byte[] set_Recent_After = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 
-        //Проверки и отчеты
+        // Проверки и отчеты
         LogEntries browserLogs = driver.manage().logs().get(LogType.BROWSER);
         String formattedLogs = LogUtils.formatBrowserLogs(browserLogs);
         Allure.attachment("Логи", formattedLogs);
-        Allure.addAttachment("Скриншот: Было", new ByteArrayInputStream(set_Resent_Before));
-        Allure.addAttachment("Скриншот: Стало", new ByteArrayInputStream(set_Resent_After));
+        Allure.addAttachment("Скриншот: До действий", new ByteArrayInputStream(set_Recent_Before));
+        Allure.addAttachment("Скриншот: После действий", new ByteArrayInputStream(set_Recent_After));
         t.assertAll();
-
     }
 }

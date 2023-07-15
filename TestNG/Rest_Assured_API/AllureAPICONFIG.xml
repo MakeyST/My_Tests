@@ -5,7 +5,7 @@
     </listeners>
     <test name="API Test">
         <classes>
-            <class name="API.Api_sign_in"/>
+            <class name="API.ApiSignIn"/>
             <class name="API.RegistrationAPITest"/>
         </classes>
     </test>
