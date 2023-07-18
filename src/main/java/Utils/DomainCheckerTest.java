@@ -10,9 +10,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.poi.ss.usermodel.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.devtools.DevTools;
 import org.openqa.selenium.devtools.DevToolsException;
@@ -23,6 +21,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
@@ -45,9 +44,10 @@ public class DomainCheckerTest {
 
     @BeforeClass
     public void setUp() {
+        System.setProperty("webdriver.chrome.logfile", "chromedriver.log");
         System.setProperty(
                 "webdriver.chrome.driver",
-                "C:\\chromedriver113.0.5672.127.exe"
+                "C:\\ChromeDriver114.0.5735.90.exe"
         );
         driver = new ChromeDriver();
         httpClient = HttpClientBuilder.create().build();
@@ -56,11 +56,11 @@ public class DomainCheckerTest {
     @DataProvider(name = "domains")
     public Object[][] getDomains() throws IOException {
         // Путь к Excel-документу
-        String filePath = "/Excel/";
+        String filePath = "src/main/resources/Excel/DOMAIN.xlsx";
         // Номер листа в Excel-документе, где находятся URL-адреса
-        int sheetIndex = 2;
+        int sheetIndex = 1; // Измените согласно вашим требованиям
         // Номер столбца в Excel-документе, где находятся URL-адреса
-        int columnIndex = 1;
+        int columnIndex = 1; // Измените согласно вашим требованиям
 
         FileInputStream fis = new FileInputStream(filePath);
         Workbook workbook = WorkbookFactory.create(fis);
@@ -84,13 +84,92 @@ public class DomainCheckerTest {
 
     @Test(dataProvider = "domains")
     public void testDomainAvailability(String domain) {
+        WaitUtils waitUtils = new WaitUtils(driver, Duration.ofSeconds(10));
+
+        // Отладочная информация
+        System.out.println("Открываю страницу: " + domain);
+
+        // Открытие страницы
         openPage(domain);
+
+        // Ожидание загрузки страницы
+        waitUtils.waitForPageToLoad();
+
+        // Другие шаги вашего тестового случая
+        authorize();
         checkAPIStatuses();
     }
 
-    @Step("Открытие страницы {domain}")
+
+
     private void openPage(String domain) {
-        driver.get(domain);
+        step("Открываю страницу: " + domain, Status.PASSED);
+        System.out.println("Domain value: " + domain);
+        try {
+            driver.get(domain);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Step("Авторизация на сайте")
+    private void authorize() {
+        WaitUtils waitUtils = new WaitUtils(driver, Duration.ofSeconds(10));
+        System.out.println("-----Авторизация запущена-----");
+        SoftAssert t = new SoftAssert();
+
+        try {
+            //Клик "Войти"
+            step("Открыть окно авторизации", Status.PASSED);
+            waitUtils.waitForPageToLoad();
+            driver.findElement(By.id("btn-login")).click();
+            waitUtils.waitForPageToLoad();
+            byte[] loginPopup = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+
+            //Ввод логина
+            step("Ввод логина", Status.PASSED);
+            waitUtils.waitForPageToLoad();
+            driver.findElement(By.id("login-field-email")).sendKeys(LoginPro100igo228);
+            waitUtils.waitForPageToLoad();
+            byte[] screenshotLogin = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+
+            //Проверка логина
+            step("Проверка логина", Status.PASSED);
+            String TextLogin = driver.findElement(By.id("login-field-email")).getAttribute("value");
+            String ExpectedLogin = LoginPro100igo228;
+            t.assertEquals(TextLogin, ExpectedLogin,"Проверка поля E-mail ПРОВАЛЕНА!");
+            t.assertNotNull(TextLogin);
+            System.out.println("*Проверка E-mail, ---> выполнено*");
+
+            //Ввод пароль
+            step("Ввод пароль", Status.PASSED);
+            waitUtils.waitForPageToLoad();
+            driver.findElement(By.id("login-field-password")).sendKeys(PasswordALLUSERS);
+            waitUtils.waitForPageToLoad();
+            byte[] screenshotPassword = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+
+            //Проверка пароля
+            step("Проверка пароля", Status.PASSED);
+            String TextPassword = driver.findElement(By.id("login-field-password")).getAttribute("value");
+            String ExpectedPassword = PasswordALLUSERS;
+            t.assertEquals(TextPassword, ExpectedPassword, "Проверка поля Пароль ПРОВАЛЕНА!");
+            t.assertNotNull(TextPassword);
+            System.out.println("*Проверка пароля, ---> выполнено*");
+
+            //Клик "Войти" в учётку
+            step("Клик Войти в учётку", Status.PASSED);
+            waitUtils.waitForPageToLoad();
+            driver.findElement(By.id("login-form-login")).click();
+            waitUtils.waitForPageToLoad();
+
+            System.out.println("Авторизация пройдена");
+            waitUtils.waitForPageToLoad();
+            byte[] screenshotTo = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        } catch (WebDriverException e) {
+            step("Ошибка при авторизации: " + e.getMessage(), Status.FAILED);
+            throw new RuntimeException(e);
+        }
     }
 
     @Step("Проверка статусов API")
@@ -111,8 +190,12 @@ public class DomainCheckerTest {
             HttpResponse response = httpClient.execute(request);
             StatusLine statusLine = response.getStatusLine();
             statusCode = statusLine.getStatusCode();
+            if (statusCode != 200 && statusCode != 204) {
+                step("Ошибка: Статус запроса для " + url + " не является 200 или 204", Status.FAILED);
+            }
             logAPIResponse(url, statusCode, response.getEntity());
         } catch (IOException e) {
+            step("Ошибка при выполнении запроса к " + url + ": " + e.getMessage(), Status.FAILED);
             e.printStackTrace();
         }
         return statusCode;
@@ -142,56 +225,12 @@ public class DomainCheckerTest {
                 apiUrls.add(url);
             });
 
-            // Выполняйте действия на странице, которые вызывают запросы к API
-            // Например, нажатие кнопки или другие действия, вызывающие запросы к API
-            WebElement buttonElement = driver.findElement(By.xpath("//button[@id=\"btn-login\"]"));
-            buttonElement.click();
-            //Клик "Войти"
-            step("Открыть окно авторизации", Status.PASSED);
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            driver.findElement(By.id("btn-login")).click();
-            Thread.sleep(400);
-
-            //Ввод логин
-            step("Ввод логин", Status.PASSED);
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            driver.findElement(By.id("login-field-email")).sendKeys(LoginPro100igo228);
-            Thread.sleep(100);
-
-            //Проверка логина
-            step("Проверка логина", Status.PASSED);
-            String TextLogin = driver.findElement(By.id("login-field-email")).getAttribute("value");
-            String ExpectedLogin = LoginPro100igo228;
-            Assert.assertEquals(TextLogin, ExpectedLogin,"Проверка поля E-mail ПРОВАЛЕНА!");
-            Assert.assertNotNull(TextLogin);
-            System.out.println("*Проверка E-mail, ---> выполнено*");
-
-            //Ввод пароль
-            step("Ввод пароль", Status.PASSED);
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            driver.findElement(By.id("login-field-password")).sendKeys(PasswordALLUSERS);
-            Thread.sleep(100);
-
-            //Проверка пароля
-            step("Проверка пароля", Status.PASSED);
-            String TextPassword = driver.findElement(By.id("login-field-password")).getAttribute("value");
-            String ExpectedPassword = PasswordALLUSERS;
-            Assert.assertEquals(TextPassword, ExpectedPassword, "Проверка поля Пароль ПРОВАЛЕНА!");
-            Assert.assertNotNull(TextPassword);
-
-            //Клик "Войти" в учётку
-            step("Клик Войти в учётку", Status.PASSED);
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            driver.findElement(By.id("login-form-login")).click();
-            Thread.sleep(200);
-
             devTools.send(Network.disable());
 
             devTools.close();
         } catch (DevToolsException e) {
+            step("Ошибка при получении URL'ов API: " + e.getMessage(), Status.FAILED);
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
 
         return apiUrls;

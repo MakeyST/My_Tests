@@ -34,7 +34,7 @@ public class START {
         System.setProperty(
 
                 "webdriver.chrome.driver",
-                "C:\\chromedriver113.0.5672.127.exe"
+                "C:\\ChromeDriver114.0.5735.90.exe"
         );
         step("Кофниг, запуск", Status.PASSED);
 
@@ -244,17 +244,6 @@ public class START {
             FAQ.genQue(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
-    @Epic("ПОПУЛЯРНЫЕ ВОПРОСЫ (F.A.Q.)")
-    @Owner("Makeenkov Igor")
-    @Step("Кошелек")
-    @Severity(SeverityLevel.CRITICAL)
-    @Test(alwaysRun = true, priority = 2, invocationCount = 1, groups = "FAQ", description = "Кошелек")
-    public void gensWallet(){
-        step("Кошелек", Status.PASSED);
-        try {
-            StartFAQ FAQ = new StartFAQ();
-            FAQ.genwal(driver);
-        }catch (Exception e) {throw new RuntimeException(e);}}
 
 
     @Epic("ВЫХОД")

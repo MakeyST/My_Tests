@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Domain Checker Suite">
+    <test name="Domain Availability Test">
+        <classes>
+            <class name="Utils.DomainCheckerTest"/>
+        </classes>
+    </test>
+</suite>

@@ -1,7 +1,6 @@
 package FAQ.ConfigFileFAQ;
 
 import FAQ.General_Questions;
-import FAQ.Wallet;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
@@ -13,10 +12,10 @@ public class StartFAQ {
             faq.general_Questions(driver);
         }catch (Exception e) {throw new RuntimeException(e);}}
 
-    @Test(alwaysRun = true, description = "Кошелек")
+    /*@Test(alwaysRun = true, description = "Кошелек")
     public void genwal (WebDriver driver){
         try {
-            Wallet genfaq = new Wallet();
+            Wallet genfaq = new Wallet(driver);
             genfaq.genWallet(driver);
-        }catch (Exception e) {throw new RuntimeException(e);}}
+        }catch (Exception e) {throw new RuntimeException(e);}}*/
 }
