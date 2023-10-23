@@ -1,0 +1,1 @@
+{"uuid":"230608b0-8f78-4521-8432-bb5ebe35272a","name":"API.RegistrationAPITest","children":["4a48110d-7c2f-4444-8ddd-07ade1493939"],"befores":[{"name":"setup","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1696601505008,"stop":1696601505906}],"afters":[],"start":1696601504967,"stop":1696601508692}

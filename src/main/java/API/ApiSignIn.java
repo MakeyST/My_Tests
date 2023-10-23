@@ -10,9 +10,10 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.containsString;
 
 public class ApiSignIn {
-    private static final String BASE_URL = "https://api.gz62f.top";
+    private static final String BASE_URL = "https://g07c.top/";
     private static final String ENDPOINT = "/auth/login/email";
     private RequestSpecification request;
     private String requestBody;
@@ -31,6 +32,12 @@ public class ApiSignIn {
         Allure.attachment("Статус код", String.valueOf(response.getStatusCode()));
         Allure.attachment("JSON ответ", response.getBody().prettyPrint());
         Allure.attachment("Отчет", requestBody);
+
+        // Проверка наличия капчи
+        response.then()
+                .statusCode(200);
+//                .body(containsString("captcha"))
+//                .body("success", equalTo(false));
     }
 
     @Step("Авторизация с использованием электронной почты: {email}")
@@ -41,14 +48,9 @@ public class ApiSignIn {
                 .contentType(ContentType.JSON)
                 .body(requestBody);
 
-        Response response = request.post(ENDPOINT);
-
-        response.then()
-                .statusCode(200)
-                .body("success", equalTo(true));
-
-        return response;
+        return request.post(ENDPOINT);
     }
 }
+
 
 

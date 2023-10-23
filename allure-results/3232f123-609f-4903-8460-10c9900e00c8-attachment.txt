@@ -1,0 +1,10 @@
+{
+  "headers" : { },
+  "original" : {
+    "success" : true,
+    "token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5nejYyZi50b3AvYXV0aC9yZWdpc3Rlci9lbWFpbCIsImlhdCI6MTY5NjYwMzQxMCwiZXhwIjoxNjk3MDM1NDEwLCJuYmYiOjE2OTY2MDM0MTAsImp0aSI6Ind2R3k2ZDNVNThFR25hVmQiLCJzdWIiOjE5NDAwMjUsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJpZCI6MTk0MDAyNSwicm9sZSI6InVzZXIiLCJuYW1lIjoicHJvMTAwaWdvMjI4Ljk2MjQiLCJoYXNoIjoiMmM3NzY5NGU4NGQ5OTk3MGIwZjdjZGNiNmM5MzYyY2Q3YjQzM2UyYyIsInBob3RvX3NtIjoiaHR0cHM6Ly9nZXR4YXZhdGFycy5hbXMzLmRpZ2l0YWxvY2VhbnNwYWNlcy5jb20vYXZhdGFyLnN2ZyIsInBob3RvX21kIjoiaHR0cHM6Ly9nZXR4YXZhdGFycy5hbXMzLmRpZ2l0YWxvY2VhbnNwYWNlcy5jb20vYXZhdGFyLnN2ZyIsInBob3RvX2xnIjoiaHR0cHM6Ly9nZXR4YXZhdGFycy5hbXMzLmRpZ2l0YWxvY2VhbnNwYWNlcy5jb20vYXZhdGFyLnN2ZyIsImN1cnJlbmN5IjpudWxsfQ.7TpE0SsGW1POl3BUWd6e8_8gp5YSyFBhB4HICSVOyx0",
+    "token_ttl" : 432000,
+    "origin" : "https://api.gz62f.top"
+  },
+  "exception" : null
+}

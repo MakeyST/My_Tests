@@ -1,4 +1,4 @@
 Запустите тесты с помощью команды Maven:  mvn test -DsuiteXmlFile=AllureAPICONFIG.xml
 
-После выполнения тестов, сгенерируются отчеты Allure. Вы можете открыть отчеты веб-браузере с помощью команды: allure serve allure-results или allure serve
+После выполнения тестов, сгенерируются отчеты Allure. Вы можете открыть отчеты веб-браузере с помощью команды: allure serve
 

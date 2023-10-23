@@ -1,0 +1,10 @@
+{
+  "headers" : { },
+  "original" : {
+    "success" : true,
+    "token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaS5nMDFhLnRvcC9hdXRoL3JlZ2lzdGVyL2VtYWlsIiwiaWF0IjoxNjk2NjAyMDUwLCJleHAiOjE2OTcwMzQwNTAsIm5iZiI6MTY5NjYwMjA1MCwianRpIjoickd3ZkM2U2tXQVkyTHhYdCIsInN1YiI6MTkzOTY5NiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsImlkIjoxOTM5Njk2LCJyb2xlIjoidXNlciIsIm5hbWUiOiJwcm8xMDBpZ28yMjguODE4OCIsImhhc2giOiI3NzdkZTU5Y2FmNTliM2EzY2UxZGEwNDMxNzQ1YjA1ZWMwZjRiOTkyIiwicGhvdG9fc20iOiJodHRwczovL2dldHhhdmF0YXJzLmFtczMuZGlnaXRhbG9jZWFuc3BhY2VzLmNvbS9hdmF0YXIuc3ZnIiwicGhvdG9fbWQiOiJodHRwczovL2dldHhhdmF0YXJzLmFtczMuZGlnaXRhbG9jZWFuc3BhY2VzLmNvbS9hdmF0YXIuc3ZnIiwicGhvdG9fbGciOiJodHRwczovL2dldHhhdmF0YXJzLmFtczMuZGlnaXRhbG9jZWFuc3BhY2VzLmNvbS9hdmF0YXIuc3ZnIiwiY3VycmVuY3kiOm51bGx9.ErSz4RpM92cBhYJR12PzLK034-Owzd4lnib6cyajwHo",
+    "token_ttl" : 432000,
+    "origin" : "https://api.g01a.top"
+  },
+  "exception" : null
+}

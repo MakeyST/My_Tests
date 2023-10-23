@@ -1,0 +1,9 @@
+no such element: Unable to locate element: {"method":"css selector","selector":"#\/\/button\[\@id\=\"btn\-login\"\]"}
+  (Session info: chrome=116.0.5845.111)
+For documentation on this error, please visit: https://selenium.dev/exceptions/#no_such_element
+Build info: version: '4.9.1', revision: 'eb2032df7f'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.8'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [d4513fa696ead8f06e893fb54cc0bc9d, findElement {using=id, value=//button[@id="btn-login"]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 116.0.5845.111, chrome: {chromedriverVersion: 116.0.5845.96 (1a3918166880..., userDataDir: C:\Users\pro10\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58697}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58697/devtoo..., se:cdpVersion: 116.0.5845.111, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: d4513fa696ead8f06e893fb54cc0bc9d

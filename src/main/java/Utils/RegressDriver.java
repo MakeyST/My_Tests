@@ -2,7 +2,9 @@ package Utils;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import static Utils.LocatorsDriver.Test;
 
@@ -10,12 +12,15 @@ import static Utils.LocatorsDriver.Test;
 public class RegressDriver {
 
     private static ChromeDriver _regressDriver;
-    @Description("Использования драйвера для запуска страницы")
-    public static ChromeDriver getDriver() {
-        if (RegressDriver._regressDriver == null) {
-            RegressDriver._regressDriver = new ChromeDriver();
-            _regressDriver.get(Test);
+
+    @Description("Использование драйвера для запуска страницы")
+    public static ChromeDriver getDriver(ChromeOptions options) {
+        if (_regressDriver == null) {
+            _regressDriver = new ChromeDriver(options);
         }
-        return RegressDriver._regressDriver;
+        return _regressDriver;
     }
 }
+
+
+

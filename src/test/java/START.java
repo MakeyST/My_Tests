@@ -23,6 +23,7 @@ public class START {
     private MutableCapabilities options;
     private MutableCapabilities caps;
 
+
     //Система
     @Epic("Запуск всех кейсов (конфиг)")
     @Owner("Makeenkov Igor")
@@ -32,23 +33,28 @@ public class START {
     public void Start() {
         step("Путь к драйверу", Status.PASSED);
         System.setProperty(
-
                 "webdriver.chrome.driver",
-                "C:\\ChromeDriver114.0.5735.90.exe"
+                "C:\\chromedriver.exe"
         );
-        step("Кофниг, запуск", Status.PASSED);
 
-        step("Настройки бразуера", Status.PASSED);
+        step("Конфиг, запуск", Status.PASSED);
+
+        step("Настройки браузера", Status.PASSED);
         ChromeOptions browserOptions = new ChromeOptions();
         browserOptions.setPlatformName(LocatorsBrowserOptions.PlatformName);
         browserOptions.setBrowserVersion(LocatorsBrowserOptions.BrowserVersion);
         browserOptions.addArguments(LocatorsBrowserOptions.WindowSize);
         browserOptions.addArguments(LocatorsBrowserOptions.BrowserMode);
-        driver = RegressDriver.getDriver();
+
+        driver = RegressDriver.getDriver(browserOptions);
+
         step("Чистим куки при запуске", Status.PASSED);
         driver.manage().deleteAllCookies(); // Чистим куки
+
         step("Драйвер ===> ON", Status.PASSED);
     }
+
+
 
     @Epic("Авторизация")
     @Owner("Makeenkov Igor")

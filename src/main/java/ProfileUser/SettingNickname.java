@@ -4,6 +4,7 @@ import Utils.LogUtils;
 import Utils.WaitUtils;
 import io.qameta.allure.*;
 import io.qameta.allure.model.Status;
+import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.*;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogType;
@@ -21,6 +22,7 @@ public class SettingNickname {
     String Setting = "//a[@class=\"rc-tabs__link js-open-tab\"]";
     String Nickname = "//input[@class=\"field field-group__field\"]";
     String Change = "//button[@class=\"btn field-group__btn\"]";
+    String NICKNAME_PUSH = "//div[@class=\"noty-float noty-float_green\"]";
     @Step("Смена никнейма")
     @Description("Смена никнейма")
     public void setNickname (WebDriver driver) throws InterruptedException, IOException {
@@ -37,18 +39,18 @@ public class SettingNickname {
 
         //Ввод ENG никнейма
         step("Ввод ENG никнейма", Status.PASSED);
-        waitUtils.waitForPageToLoad();
+        waitUtils.waitForElementToBeClickable(By.className(Nickname));
         driver.findElement(By.xpath(Nickname)).sendKeys(Keys.CONTROL,"a");
         driver.findElement(By.xpath(Nickname)).sendKeys(Keys.DELETE);
         driver.findElement(By.xpath(Nickname)).sendKeys("MakeyStar");
 
         //Клик "Сменить/Change"
         step("Клик Сменить/Change", Status.PASSED);
-        waitUtils.waitForPageToLoad();
+        waitUtils.waitForElementToBeClickable(By.className(Change));
         driver.findElement(By.xpath(Change)).click();
-        waitUtils.waitForPageToLoad();
+        waitUtils.waitForElementToBeVisible(By.className(NICKNAME_PUSH));
         driver.navigate().refresh();
-        waitUtils.waitForPageToLoad();
+        waitUtils.waitForElementToBeVisible(By.className(Nickname));
 
         //Проверка поля Никнейм (ENG)
         step("Проверка поля Никнейм (ENG)", Status.PASSED);
@@ -64,18 +66,18 @@ public class SettingNickname {
 
         //Ввод RUS никнейма
         step("Ввод RUS никнейма", Status.PASSED);
-        waitUtils.waitForPageToLoad();
+        waitUtils.waitForElementToBeClickable(By.className(Nickname));
         driver.findElement(By.xpath(Nickname)).sendKeys(Keys.CONTROL,"a");
         driver.findElement(By.xpath(Nickname)).sendKeys(Keys.DELETE);
         driver.findElement(By.xpath(Nickname)).sendKeys("Игорь");
 
         //Клик "Сменить/Change"
         step("Клик Сменить/Change", Status.PASSED);
-        waitUtils.waitForPageToLoad();
+        waitUtils.waitForElementToBeClickable(By.className(Change));
         driver.findElement(By.xpath(Change)).click();
-        waitUtils.waitForPageToLoad();
+        waitUtils.waitForElementToBeVisible(By.className(NICKNAME_PUSH));
         driver.navigate().refresh();
-        waitUtils.waitForPageToLoad();
+        waitUtils.waitForElementToBeVisible(By.className(Nickname));
 
         //Проверка поля Никнейм (RUS)
         step("Проверка поля Никнейм (RUS)", Status.PASSED);
